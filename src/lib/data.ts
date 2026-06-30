@@ -376,7 +376,7 @@ export const contactInfo = [
   {
     icon: Phone,
     label: 'Call Us',
-    value: '+919592290407',
+    value: '+91 9592290407',
     sub: 'Mon–Sat, 10 AM–6 PM IST',
     color: '#06b6d4',
     bg: 'bg-cyan-50',

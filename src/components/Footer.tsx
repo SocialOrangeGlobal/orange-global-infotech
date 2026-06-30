@@ -58,7 +58,7 @@ const columns = [
     title: 'Contact Us',
     links: [
       { label: 'info@orangeglobal.com', href: 'mailto:info@orangeglobal.com' },
-      { label: '+919592290407', href: 'tel:+919592290407' },
+      { label: '+91 9592290407', href: 'tel:+91 9592290407' },
       { label: 'SCO 3, Level 1, Sector 41-D,\nChandigarh 160036', href: '/contact' },
     ],
   },
