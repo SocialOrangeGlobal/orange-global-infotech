@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/logo.png" alt="Orange Global Infotech Logo" width="400"/>
+</p>
+
 # Orange Global Infotech
 
 Welcome to the **Orange Global Infotech** digital platform! This is a modern, high-performance web presence designed to showcase our services, portfolio, and digital solutions.
