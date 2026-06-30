@@ -120,16 +120,6 @@ export default function TestimonialsSection() {
               </div>
             </motion.div>
           </AnimatePresence>
-
-          {/* Read Story Button */}
-          <div className="flex justify-center mt-12">
-            <a
-              href="/contact"
-              className="px-6 py-3 bg-[#FF6B00] text-white font-medium rounded-full hover:bg-[#FF8C33] transition-all duration-300 shadow-lg shadow-orange-500/20 hover:-translate-y-0.5 text-sm"
-            >
-              Read Customer Story
-            </a>
-          </div>
         </div>
       </div>
     </section>
