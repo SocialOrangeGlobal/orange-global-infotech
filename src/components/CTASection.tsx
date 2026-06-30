@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MessageSquare } from 'lucide-react'
+import HeroBubblePhysics from './animations/HeroBubblePhysics'
 
 export default function CTASection() {
   return (
@@ -10,6 +11,11 @@ export default function CTASection() {
       className="py-28 md:py-36 relative overflow-hidden"
       style={{ backgroundColor: '#f7f7f5' }}
     >
+      {/* 3D Bubble Physics Background */}
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-[20] pointer-events-none">
+        <HeroBubblePhysics />
+      </div>
+
       {/* Dot Pattern */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -59,9 +65,9 @@ export default function CTASection() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
         <motion.div
-          className="text-center max-w-3xl mx-auto"
+          className="text-center max-w-3xl mx-auto pointer-events-none"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
@@ -89,7 +95,7 @@ export default function CTASection() {
           {/* CTAs */}
           <motion.div
             variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center relative z-[30] pointer-events-auto"
           >
             <a
               href="/contact"
