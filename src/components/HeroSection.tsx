@@ -61,7 +61,7 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col justify-start overflow-hidden pt-32 md:pt-56 lg:pt-64 pb-0 group"
       style={{ backgroundColor: '#f7f7f5' }}
     >
-      <div className="absolute top-0 left-0 right-0 bottom-72 lg:bottom-80 z-0 pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 bottom-72 lg:bottom-80 z-[20] pointer-events-none">
         <HeroBubblePhysics />
       </div>
 
@@ -117,7 +117,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
         <motion.div
-          className="flex flex-col items-center text-center max-w-4xl mx-auto pointer-events-auto mt-8 sm:mt-0"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto pointer-events-none mt-8 sm:mt-0"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -148,7 +148,7 @@ export default function HeroSection() {
           </motion.div>
 
           {/* CTAs */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-24 w-full sm:w-auto">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-24 w-full sm:w-auto relative z-[30] pointer-events-auto">
             <Link
               href="/contact"
               className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#111111] text-white font-medium rounded-xl hover:bg-[#111111] transition-colors duration-300 shadow-lg shadow-[#111111]/10 text-base"

@@ -56,7 +56,9 @@ export default function ProjectsHeroSection() {
       style={{ backgroundColor: '#f7f7f5' }}
     >
       {/* 3D Bubble Physics Background */}
-      <HeroBubblePhysics />
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-[20] pointer-events-none">
+        <HeroBubblePhysics />
+      </div>
 
       {/* Dot Pattern Background */}
       <div
@@ -110,7 +112,7 @@ export default function ProjectsHeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full pointer-events-none">
         <motion.div
-          className="flex flex-col items-center text-center max-w-4xl mx-auto pointer-events-auto"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto pointer-events-none"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
