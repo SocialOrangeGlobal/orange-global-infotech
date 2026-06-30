@@ -75,8 +75,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${sora.variable} bg-[#FAFAFA]`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
-        <CustomCursor />
-        <GlobalClickBubbles />
+        {/* <CustomCursor />
+        <GlobalClickBubbles /> */}
         {children}
       </body>
     </html>
