@@ -188,10 +188,10 @@ export default function HomeServicesSection() {
           transition={{ duration: 0.6 }}
         >
           <Link
-            href="/contact"
+            href="/services"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#111111] text-white font-medium rounded-2xl hover:bg-black transition-all duration-300 hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg"
           >
-            Discuss Your Project
+            View All Services
             <ArrowUpRight size={18} />
           </Link>
         </motion.div>
