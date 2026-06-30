@@ -1,13 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { projects } from '@/lib/data'
-import { Monitor, Tablet, Smartphone, Rocket, Code2, Zap, ArrowUpRight } from 'lucide-react'
+import { Monitor, Tablet, Smartphone, Rocket, Code2, Zap, ArrowUpRight, Loader2 } from 'lucide-react'
 
 function DeviceMockup({ images, alt, url, accentColor }: { images: { desktop: string; tablet: string; mobile: string }; alt: string; url: string; accentColor: string }) {
   const [device, setDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+  const [loadedState, setLoadedState] = useState({
+    desktop: false,
+    tablet: false,
+    mobile: false
+  })
+
+  // Preload and robustly track image loading states
+  useEffect(() => {
+    const checkImage = (src: string, key: 'desktop' | 'tablet' | 'mobile') => {
+      const img = new window.Image()
+      img.src = src
+      if (img.complete) {
+        setLoadedState(prev => ({ ...prev, [key]: true }))
+      } else {
+        img.onload = () => setLoadedState(prev => ({ ...prev, [key]: true }))
+        img.onerror = () => setLoadedState(prev => ({ ...prev, [key]: true }))
+      }
+    }
+
+    checkImage(images.desktop, 'desktop')
+    checkImage(images.tablet, 'tablet')
+    checkImage(images.mobile, 'mobile')
+  }, [images])
 
   return (
     <div className="relative w-full select-none group flex flex-col items-center">
@@ -69,9 +92,14 @@ function DeviceMockup({ images, alt, url, accentColor }: { images: { desktop: st
                   </div>
 
                   {/* Screenshot Container */}
-                  <div className="relative w-full bg-white overflow-hidden">
-                    <img src={images.desktop} alt={alt} className="w-full h-auto block" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-transparent pointer-events-none" />
+                  <div className="relative w-full bg-[#FAFAFA] overflow-hidden flex items-center justify-center min-h-[200px] sm:min-h-[300px]">
+                    {!loadedState.desktop && (
+                      <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#FAFAFA]">
+                        <Loader2 className="animate-spin" size={32} style={{ color: accentColor }} />
+                      </div>
+                    )}
+                    <img src={images.desktop} alt={alt} className={`w-full h-auto block transition-opacity duration-500 ${loadedState.desktop ? 'opacity-100' : 'opacity-0'}`} />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-transparent pointer-events-none z-20" />
                   </div>
                 </div>
               </div>
@@ -102,8 +130,13 @@ function DeviceMockup({ images, alt, url, accentColor }: { images: { desktop: st
                 className="relative bg-[#1a1a1e] rounded-[2rem] sm:rounded-[2.5rem] p-[10px] sm:p-[14px]"
                 style={{ boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)' }}
               >
-                <div className="bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden relative w-full">
-                  <img src={images.tablet} alt={`${alt} Tablet`} className="w-full h-auto block" />
+                <div className="bg-[#FAFAFA] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden relative w-full flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
+                  {!loadedState.tablet && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#FAFAFA]">
+                      <Loader2 className="animate-spin" size={32} style={{ color: accentColor }} />
+                    </div>
+                  )}
+                  <img src={images.tablet} alt={`${alt} Tablet`} className={`w-full h-auto block transition-opacity duration-500 ${loadedState.tablet ? 'opacity-100' : 'opacity-0'}`} />
                 </div>
                 {/* Camera dot */}
                 <div className="absolute top-[20px] sm:top-[28px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black border border-[#1a1a1e]" />
@@ -124,11 +157,20 @@ function DeviceMockup({ images, alt, url, accentColor }: { images: { desktop: st
                 className="relative bg-[#1a1a1e] rounded-[2.5rem] sm:rounded-[3rem] p-[10px] sm:p-[12px]"
                 style={{ boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)' }}
               >
-                <div className="bg-white rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative w-full">
+                <div className="bg-[#FAFAFA] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative w-full flex items-center justify-center min-h-[400px] sm:min-h-[500px]">
                   {/* Dynamic Island / Notch */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-6 sm:h-7 bg-[#1a1a1e] rounded-b-2xl sm:rounded-b-3xl z-10"></div>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-6 sm:h-7 bg-[#1a1a1e] rounded-b-2xl sm:rounded-b-3xl z-30"></div>
 
-                  <img src={images.mobile} alt={`${alt} Mobile`} className="w-full h-auto block" />
+                  {!loadedState.mobile && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#FAFAFA]">
+                      <Loader2 className="animate-spin" size={32} style={{ color: accentColor }} />
+                    </div>
+                  )}
+                  <img
+                    src={images.mobile}
+                    alt={`${alt} Mobile`}
+                    className={`w-full h-auto block transition-opacity duration-500 z-20 relative ${loadedState.mobile ? 'opacity-100' : 'opacity-0'}`}
+                  />
                 </div>
               </div>
             </motion.div>
