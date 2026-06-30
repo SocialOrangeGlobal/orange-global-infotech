@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Sora } from 'next/font/google'
 import './globals.css'
+import GlobalClickBubbles from '@/components/animations/GlobalClickBubbles'
+import CustomCursor from '@/components/animations/CustomCursor'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -73,6 +75,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${sora.variable} bg-[#FAFAFA]`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
+        <CustomCursor />
+        <GlobalClickBubbles />
         {children}
       </body>
     </html>
