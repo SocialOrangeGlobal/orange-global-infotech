@@ -6,8 +6,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 
-import HeroBubblePhysics from './animations/HeroBubblePhysics'
-
+import dynamic from 'next/dynamic'
+const HeroBubblePhysics = dynamic(() => import('./animations/HeroBubblePhysics'), { ssr: false })
 function RotatingText({ words }: { words: string[] }) {
   const [index, setIndex] = useState(0)
 

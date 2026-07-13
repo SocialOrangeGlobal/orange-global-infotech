@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Sora } from 'next/font/google'
 import './globals.css'
-import GlobalClickBubbles from '@/components/animations/GlobalClickBubbles'
-import CustomCursor from '@/components/animations/CustomCursor'
+import dynamicImport from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+
+const GlobalClickBubbles = dynamicImport(() => import('@/components/animations/GlobalClickBubbles'), { ssr: false })
+const CustomCursor = dynamicImport(() => import('@/components/animations/CustomCursor'), { ssr: false })
 import { fetchWebsiteContent } from '@/lib/api'
 import type { NavContent, FooterContent } from '@/lib/types'
 
