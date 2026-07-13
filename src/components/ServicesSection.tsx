@@ -69,7 +69,7 @@ function ServiceVisual({ service }: { service: any }) {
                 {(sub.features || []).map((f: string) => (
                   <li key={f} className="flex items-center gap-1.5">
                     <Check size={10} style={{ color: service.metadata?.accentColor || '#f97316' }} className="flex-shrink-0" />
-                    <span className="text-[11px] text-gray-500 leading-snug">{f}</span>
+                    <span className="text-[11px] text-gray-600 leading-snug">{f}</span>
                   </li>
                 ))}
               </ul>
@@ -149,7 +149,7 @@ export default function ServicesSection({
                   {service.title}
                 </h3>
 
-                <p className="text-base text-gray-500 mb-7 leading-relaxed">
+                <p className="text-base text-gray-600 mb-7 leading-relaxed">
                   {service.description}
                 </p>
 

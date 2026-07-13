@@ -39,10 +39,10 @@ export default function AboutSection({
           variants={stagger}
         >
           <motion.div variants={fadeUp} className="text-center mb-16">
-            <h3 className="font-heading font-bold text-4xl md:text-5xl text-[#111111] mb-5 tracking-tight">
+            <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#111111] mb-5 tracking-tight">
               {title}
-            </h3>
-            <p className="text-[#5F6368] text-lg max-w-2xl mx-auto">
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               {description}
             </p>
           </motion.div>
@@ -69,10 +69,10 @@ export default function AboutSection({
                     <Icon size={26} style={{ color }} strokeWidth={1.5} />
                   </div>
 
-                  <h4 className="font-heading font-bold text-xl text-[#111111] mb-3">
+                  <h3 className="font-heading font-bold text-xl text-[#111111] mb-3">
                     {card.title}
-                  </h4>
-                  <p className="text-[#5F6368] text-[15px] leading-relaxed relative z-10">
+                  </h3>
+                  <p className="text-gray-600 text-[15px] leading-relaxed relative z-10">
                     {card.description}
                   </p>
                 </motion.div>

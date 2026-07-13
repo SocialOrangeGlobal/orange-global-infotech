@@ -74,7 +74,7 @@ export default function IndustriesSection({
           <h2 className="text-4xl md:text-5xl font-semibold text-[#111111] mb-5 tracking-tight">
             {title}
           </h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-lg max-w-xl mx-auto leading-relaxed">
             {description}
           </p>
         </motion.div>

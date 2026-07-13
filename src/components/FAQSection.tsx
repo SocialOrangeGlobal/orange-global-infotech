@@ -24,7 +24,7 @@ function FAQItemComponent({ faq, index }: { faq: FAQItem; index: number }) {
         <span className={`font-semibold text-[17px] leading-snug transition-colors duration-200 ${open ? 'text-[#f97316]' : 'text-[#111111] group-hover:text-[#f97316]'}`}>
           {faq.q}
         </span>
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${open ? 'bg-[#f97316] text-white' : 'bg-gray-100 text-gray-500 group-hover:bg-orange-50 group-hover:text-[#f97316]'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${open ? 'bg-[#f97316] text-white' : 'bg-gray-100 text-gray-600 group-hover:bg-orange-50 group-hover:text-[#f97316]'}`}>
           {open ? <Minus size={14} /> : <Plus size={14} />}
         </div>
       </button>
@@ -38,7 +38,7 @@ function FAQItemComponent({ faq, index }: { faq: FAQItem; index: number }) {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] as const }}
             className="overflow-hidden"
           >
-            <p className="text-gray-500 text-[15px] leading-relaxed pb-6 pr-14">
+            <p className="text-gray-600 text-[15px] leading-relaxed pb-6 pr-14">
               {faq.a}
             </p>
           </motion.div>
@@ -75,7 +75,7 @@ export default function FAQSection({ faqs = [] }: { faqs?: FAQItem[] }) {
               <h2 className="font-heading font-bold text-4xl md:text-5xl lg:text-[3.5rem] text-[#111111] mb-6 tracking-tight leading-[1.1]">
                 Frequently asked<br />questions
               </h2>
-              <p className="text-[#5F6368] text-lg leading-relaxed mb-10 max-w-sm">
+              <p className="text-gray-600 text-lg leading-relaxed mb-10 max-w-sm">
                 Everything you need to know about working with Orange Global Infotech.
               </p>
 

@@ -113,11 +113,11 @@ export default function TestimonialsSection({
               {/* Author Avatar and Info */}
               <div className="flex flex-col items-center gap-4 mt-8">
                 <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden flex items-center justify-center">
-                  <span className="text-gray-500 font-semibold text-sm">{(t.author || t.clientName || '?').charAt(0)}</span>
+                  <span className="text-gray-600 font-semibold text-sm">{(t.author || t.clientName || '?').charAt(0)}</span>
                 </div>
                 <div>
                   <span className="text-[#111111] text-[13px] font-bold">{t.author} </span>
-                  <span className="text-gray-400 text-[13px] ml-1">{t.title}</span>
+                  <span className="text-gray-500 text-[13px] ml-1">{t.title}</span>
                 </div>
               </div>
             </motion.div>

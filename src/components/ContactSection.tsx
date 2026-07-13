@@ -44,11 +44,11 @@ function CustomSelect({
           isOpen ? 'border-[#f97316]/40 ring-2 ring-[#f97316]/10' : 'border-[#111111]/[0.08]'
         }`}
       >
-        <span className={value ? 'text-[#111111]' : 'text-[#5F6368]/60'}>
+        <span className={value ? 'text-[#111111]' : 'text-gray-600/60'}>
           {value || placeholder}
         </span>
         <svg
-          className={`w-4 h-4 text-[#5F6368] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`w-4 h-4 text-gray-600 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none" viewBox="0 0 24 24" stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -69,7 +69,7 @@ function CustomSelect({
               setIsOpen(false);
             }}
             className={`px-5 py-2.5 text-sm cursor-pointer transition-colors duration-150 ${
-              !value ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-[#5F6368] hover:bg-gray-50'
+              !value ? 'bg-[#f97316]/10 text-[#f97316] font-medium' : 'text-gray-600 hover:bg-gray-50'
             }`}
           >
             {placeholder}
@@ -138,7 +138,7 @@ export default function ContactSection({
   }
 
   const inputClass =
-    'w-full px-5 py-3.5 bg-white border border-[#111111]/[0.08] rounded-full text-sm text-[#111111] placeholder:text-[#5F6368]/60 focus:outline-none focus:border-[#f97316]/40 focus:ring-2 focus:ring-[#f97316]/10 transition-all duration-200'
+    'w-full px-5 py-3.5 bg-white border border-[#111111]/[0.08] rounded-full text-sm text-[#111111] placeholder:text-gray-600/60 focus:outline-none focus:border-[#f97316]/40 focus:ring-2 focus:ring-[#f97316]/10 transition-all duration-200'
 
   return (
     <section id="contact" className="py-24 md:py-32 bg-white relative overflow-hidden">
@@ -156,7 +156,7 @@ export default function ContactSection({
           <motion.h2 variants={fadeUp} className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl text-[#111111] mb-4 text-balance">
             Let&apos;s Build Something Amazing
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[#5F6368] text-lg max-w-xl mx-auto">
+          <motion.p variants={fadeUp} className="text-gray-600 text-lg max-w-xl mx-auto">
             Tell us about your project and we&apos;ll get back to you within 2 hours with a personalized proposal.
           </motion.p>
         </motion.div>
@@ -188,9 +188,9 @@ export default function ContactSection({
                     <Icon size={20} style={{ color }} />
                   </div>
                   <div>
-                    <p className="text-xs font-medium text-[#5F6368] mb-0.5">{info.title}</p>
+                    <p className="text-xs font-medium text-gray-600 mb-0.5">{info.title}</p>
                     <p className="font-semibold text-[#111111] text-sm">{info.value}</p>
-                    <p className="text-xs text-[#5F6368] mt-0.5">{info.sub}</p>
+                    <p className="text-xs text-gray-600 mt-0.5">{info.sub}</p>
                   </div>
                 </motion.div>
               )
@@ -242,7 +242,7 @@ export default function ContactSection({
                   <h3 className="font-heading font-bold text-2xl text-[#111111] mb-2">
                     Message Sent!
                   </h3>
-                  <p className="text-[#5F6368] max-w-xs">
+                  <p className="text-gray-600 max-w-xs">
                     Thank you for reaching out. Our team will get back to you within 2 hours.
                   </p>
                   <button
@@ -331,7 +331,7 @@ export default function ContactSection({
                       placeholder="Tell us about your project, goals, and timeline..."
                       value={form.details}
                       onChange={(e) => setForm({ ...form, details: e.target.value })}
-                      className="w-full px-5 py-4 bg-white border border-[#111111]/[0.08] rounded-[24px] text-sm text-[#111111] placeholder:text-[#5F6368]/60 focus:outline-none focus:border-[#f97316]/40 focus:ring-2 focus:ring-[#f97316]/10 transition-all duration-200 resize-none lg:flex-1"
+                      className="w-full px-5 py-4 bg-white border border-[#111111]/[0.08] rounded-[24px] text-sm text-[#111111] placeholder:text-gray-600/60 focus:outline-none focus:border-[#f97316]/40 focus:ring-2 focus:ring-[#f97316]/10 transition-all duration-200 resize-none lg:flex-1"
                     />
                   </div>
 
@@ -346,7 +346,7 @@ export default function ContactSection({
 
                   {error && <p className="text-red-500 text-sm text-center font-medium mt-2">{error}</p>}
 
-                  <p className="text-center text-xs text-[#5F6368]">
+                  <p className="text-center text-xs text-gray-600">
                     By submitting, you agree to our Privacy Policy. We never share your data.
                   </p>
                 </form>

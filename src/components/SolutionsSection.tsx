@@ -64,7 +64,7 @@ export default function SolutionsSection({
           <motion.h2 variants={fadeUp} className="font-heading font-bold text-4xl md:text-5xl text-[#111111] mb-5 text-balance">
             {title}
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[#5F6368] text-lg max-w-xl mx-auto">
+          <motion.p variants={fadeUp} className="text-gray-600 text-lg max-w-xl mx-auto">
             {description}
           </motion.p>
         </motion.div>
@@ -109,7 +109,7 @@ export default function SolutionsSection({
                 <h3 className="font-heading font-bold text-xl text-[#111111] mb-3">
                   {sol.title}
                 </h3>
-                <p className="text-[#5F6368] text-sm leading-relaxed">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {sol.description}
                 </p>
 

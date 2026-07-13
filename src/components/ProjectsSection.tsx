@@ -55,7 +55,7 @@ function DeviceMockup({ images, alt, url, accentColor }: DeviceMockupProps) {
             onClick={() => handleDeviceSwitch(key)}
             className={`p-2.5 rounded-full transition-all duration-300 ${device === key
                 ? 'bg-[#FAFAFA] shadow-sm text-[#111111]'
-                : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+                : 'text-gray-500 hover:text-gray-600 hover:bg-gray-50'
               }`}
             aria-label={label}
           >
@@ -186,7 +186,7 @@ export default function ProjectsSection({
               <div className="w-10 h-10 rounded-xl bg-orange-400 flex items-center justify-center text-white shadow-sm"><Rocket size={20} /></div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] mb-5 tracking-tight">{title}</h2>
-            <p className="text-lg text-gray-500">{description}</p>
+            <p className="text-lg text-gray-600">{description}</p>
           </motion.div>
         )}
 
@@ -222,7 +222,7 @@ export default function ProjectsSection({
                     {project.title}
                   </h3>
 
-                  <p className="text-base text-gray-500 mb-7 leading-relaxed">
+                  <p className="text-base text-gray-600 mb-7 leading-relaxed">
                     {project.description}
                   </p>
 
