@@ -188,7 +188,7 @@ export default function TechIconRenderer({ iconName, size = 16, color }: { iconN
   // 1. Check if the provided name is directly an exact key in our registry (e.g., 'SiNextdotjs')
   if (IconRegistry[iconName]) {
     Icon = IconRegistry[iconName];
-    iconColor = color || techColorMap[iconName] || iconColor;
+    iconColor = techColorMap[iconName] || color || iconColor;
   } else {
     // 2. Otherwise, normalize and look up in our friendly name map (e.g., 'next.js' -> 'SiNextdotjs')
     const normalizedName = iconName.toLowerCase().trim();
@@ -196,7 +196,7 @@ export default function TechIconRenderer({ iconName, size = 16, color }: { iconN
 
     if (reactIconName && IconRegistry[reactIconName]) {
       Icon = IconRegistry[reactIconName];
-      iconColor = color || techColorMap[reactIconName] || iconColor;
+      iconColor = techColorMap[reactIconName] || color || iconColor;
     }
   }
 
