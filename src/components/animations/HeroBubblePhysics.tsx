@@ -2,7 +2,7 @@
 import { getIcon } from '@/lib/iconMap';
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useMotionValue, useAnimationFrame, MotionValue } from 'framer-motion'
+import { motion, useMotionValue, useAnimationFrame, MotionValue, useInView } from 'framer-motion'
 import {
   Code, Globe, Smartphone, Cloud, Database, Server,
   Cpu, Box, Monitor, Layout, Rocket, Shield,
@@ -79,6 +79,7 @@ const dist = (x1: number, y1: number, x2: number, y2: number) => Math.hypot(x2 -
 
 export default function HeroBubblePhysics() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { margin: "0px" })
   const engineRef = useRef<BubbleApi[]>([])
   const [bubbleConfigs, setBubbleConfigs] = useState<Partial<BubbleApi>[]>([])
   const [isHovered, setIsHovered] = useState(false)
@@ -96,6 +97,8 @@ export default function HeroBubblePhysics() {
 
   // Smooth hover acceleration
   useAnimationFrame(() => {
+    if (!isInView) return
+    
     const targetSpeed = isHovered ? 2.0 : 0.75 // Balanced general movement speed
     speedMultiplier.current += (targetSpeed - speedMultiplier.current) * 0.05
 
