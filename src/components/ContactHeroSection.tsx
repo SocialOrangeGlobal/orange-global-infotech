@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, AnimatePresence } from 'framer-motion'
-import HeroBubblePhysics from './animations/HeroBubblePhysics'
+import dynamic from 'next/dynamic'
+const HeroBubblePhysics = dynamic(() => import('./animations/HeroBubblePhysics'), { ssr: false })
 
 function RotatingText({ words }: { words: string[] }) {
   const [index, setIndex] = useState(0)

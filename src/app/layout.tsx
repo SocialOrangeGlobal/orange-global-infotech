@@ -5,8 +5,8 @@ import dynamicImport from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const GlobalClickBubbles = dynamicImport(() => import('@/components/animations/GlobalClickBubbles'), { ssr: false })
-const CustomCursor = dynamicImport(() => import('@/components/animations/CustomCursor'), { ssr: false })
+const GlobalClickBubbles = dynamicImport(() => import('@/components/animations/GlobalClickBubbles'))
+const CustomCursor = dynamicImport(() => import('@/components/animations/CustomCursor'))
 import { fetchWebsiteContent } from '@/lib/api'
 import type { NavContent, FooterContent } from '@/lib/types'
 

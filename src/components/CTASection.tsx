@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { MessageSquare } from 'lucide-react'
-import HeroBubblePhysics from './animations/HeroBubblePhysics'
+import dynamic from 'next/dynamic'
+const HeroBubblePhysics = dynamic(() => import('./animations/HeroBubblePhysics'), { ssr: false })
 
 export default function CTASection({
   title = 'Ready To Build Your Next Digital Solution?',
