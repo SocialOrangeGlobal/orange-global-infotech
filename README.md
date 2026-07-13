@@ -11,7 +11,7 @@ Welcome to the **Orange Global Infotech** digital platform! This is a modern, hi
 - **Blazing Fast Performance**: Built with Next.js 15 for optimal Server-Side Rendering (SSR) and Static Site Generation (SSG).
 - **Modern UI/UX**: Premium aesthetic featuring glassmorphism, dynamic scrolling effects, and fluid typography.
 - **Interactive Animations**: Advanced, physics-based particle backgrounds and floating components powered by Framer Motion.
-- **Centralized Data Management**: Highly maintainable architecture where all static content (Services, Projects, FAQs) is housed within a single `lib/data.ts` repository.
+- **Dynamic CMS Integration**: Fully integrated with a custom NestJS backend for real-time dynamic updates of Services, Projects, and Website Content without redeployments.
 - **Fully Responsive**: Flawless visual scaling from ultra-wide desktops down to mobile devices.
 - **Dynamic Theming**: Intelligent usage of SVG tech-stack icons directly reflecting their official brand colors.
 
@@ -29,12 +29,14 @@ Welcome to the **Orange Global Infotech** digital platform! This is a modern, hi
 ```
 ├── public/                 # Static assets (images, logos, fonts)
 ├── src/
-│   ├── app/                # Next.js App Router (Pages, Layouts)
+│   ├── app/                # Next.js App Router (Pages: /, /services, /projects, /contact, etc.)
 │   ├── components/         # Reusable React components (UI & layout pieces)
 │   │   ├── animations/     # Framer Motion custom components (Physics Bubbles)
 │   │   └── ui/             # Core generic components (Buttons, inputs)
 │   └── lib/
-│       └── data.ts         # Centralized Data Repository
+│       ├── api.ts          # CMS backend integration (fetchServices, fetchProjects, etc.)
+│       ├── iconMap.ts      # Lucide icon dynamic mapping
+│       └── types.ts        # TypeScript interfaces for API responses
 ├── .gitignore              # Ignored files and folders
 ├── components.json         # UI component configurations
 ├── package.json            # Node.js dependencies and scripts
