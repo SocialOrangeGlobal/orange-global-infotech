@@ -8,7 +8,7 @@ import {
   SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
   SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
   SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
-  SiStrapi, SiContentful, SiNetlify, SiHeroku
+  SiStrapi, SiContentful, SiNetlify, SiHeroku, SiAmazon, SiMicrosoftazure
 } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 import { Code2 } from 'lucide-react';
@@ -23,20 +23,26 @@ const IconRegistry: Record<string, any> = {
   SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
   SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
   SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
-  SiStrapi, SiContentful, SiNetlify, SiHeroku, FaJava
+  SiStrapi, SiContentful, SiNetlify, SiHeroku, FaJava, SiAmazon, SiMicrosoftazure
 };
 
 export const techNameMap: Record<string, string> = {
   'react': 'SiReact',
+  'react.js': 'SiReact',
+  'reactjs': 'SiReact',
   'node.js': 'SiNodedotjs',
+  'node': 'SiNodedotjs',
   'nodejs': 'SiNodedotjs',
   'postgresql': 'SiPostgresql',
   'postgres': 'SiPostgresql',
   'mongodb': 'SiMongodb',
   'next.js': 'SiNextdotjs',
   'nextjs': 'SiNextdotjs',
+  'next': 'SiNextdotjs',
   'typescript': 'SiTypescript',
+  'ts': 'SiTypescript',
   'javascript': 'SiJavascript',
+  'js': 'SiJavascript',
   'tailwind css': 'SiTailwindcss',
   'tailwindcss': 'SiTailwindcss',
   'tailwind': 'SiTailwindcss',
@@ -173,10 +179,23 @@ export const techColorMap: Record<string, string> = {
 export default function TechIconRenderer({ iconName, size = 16, color }: { iconName: string, size?: number, color?: string }) {
   if (!iconName) return <Code2 size={size} color={color} />;
   
-  const normalizedName = iconName.toLowerCase().trim();
-  const reactIconName = techNameMap[normalizedName];
-  const Icon = reactIconName ? IconRegistry[reactIconName] : Code2;
-  const iconColor = color || (reactIconName ? techColorMap[reactIconName] : '#6b7280');
+  let Icon = Code2;
+  let iconColor = color || '#6b7280';
+
+  // 1. Check if the provided name is directly an exact key in our registry (e.g., 'SiNextdotjs')
+  if (IconRegistry[iconName]) {
+    Icon = IconRegistry[iconName];
+    iconColor = color || techColorMap[iconName] || iconColor;
+  } else {
+    // 2. Otherwise, normalize and look up in our friendly name map (e.g., 'next.js' -> 'SiNextdotjs')
+    const normalizedName = iconName.toLowerCase().trim();
+    const reactIconName = techNameMap[normalizedName];
+    
+    if (reactIconName && IconRegistry[reactIconName]) {
+      Icon = IconRegistry[reactIconName];
+      iconColor = color || techColorMap[reactIconName] || iconColor;
+    }
+  }
 
   return <Icon size={size} style={{ color: iconColor }} />;
 }
