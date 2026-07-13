@@ -1,29 +1,30 @@
-import { 
-  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs, 
-  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker, 
-  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss, 
-  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql, 
-  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter, 
-  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift, 
-  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
-  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
-  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
-  SiStrapi, SiContentful, SiNetlify, SiHeroku, SiAmazon, SiMicrosoftazure
+import {
+  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs,
+  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker,
+  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss,
+  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql,
+  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter,
+  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift,
+  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma,
+  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui,
+  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity,
+  SiStrapi, SiContentful, SiNetlify, SiHeroku,
 } from 'react-icons/si';
-import { FaJava } from 'react-icons/fa';
+import { FaJava, FaAws } from 'react-icons/fa';
+import { VscAzure } from 'react-icons/vsc';
 import { Code2 } from 'lucide-react';
 
 const IconRegistry: Record<string, any> = {
-  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs, 
-  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker, 
-  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss3: SiCss, 
-  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql, 
-  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter, 
-  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift, 
-  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
-  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
-  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
-  SiStrapi, SiContentful, SiNetlify, SiHeroku, FaJava, SiAmazon, SiMicrosoftazure
+  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs,
+  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker,
+  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss3: SiCss,
+  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql,
+  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter,
+  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift,
+  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma,
+  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui,
+  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity,
+  SiStrapi, SiContentful, SiNetlify, SiHeroku, FaJava, FaAws, VscAzure
 };
 
 export const techNameMap: Record<string, string> = {
@@ -48,7 +49,8 @@ export const techNameMap: Record<string, string> = {
   'tailwind': 'SiTailwindcss',
   'python': 'SiPython',
   'docker': 'SiDocker',
-  'aws': 'SiAmazon',
+  'aws': 'FaAws',
+  'amazon': 'FaAws',
   'vue': 'SiVuedotjs',
   'vue.js': 'SiVuedotjs',
   'angular': 'SiAngular',
@@ -78,7 +80,8 @@ export const techNameMap: Record<string, string> = {
   'react native': 'SiReact',
   'kubernetes': 'SiKubernetes',
   'gcp': 'SiGooglecloud',
-  'azure': 'SiMicrosoftazure',
+  'azure': 'VscAzure',
+  'microsoft azure': 'VscAzure',
   'rust': 'SiRust',
   'go': 'SiGo',
   'golang': 'SiGo',
@@ -122,7 +125,7 @@ export const techColorMap: Record<string, string> = {
   'SiTailwindcss': '#06B6D4',
   'SiPython': '#3776AB',
   'SiDocker': '#2496ED',
-  'SiAmazon': '#FF9900',
+  'FaAws': '#FF9900',
   'SiVuedotjs': '#4FC08D',
   'SiAngular': '#DD0031',
   'FaJava': '#007396',
@@ -146,7 +149,7 @@ export const techColorMap: Record<string, string> = {
   'SiFlutter': '#02569B',
   'SiKubernetes': '#326CE5',
   'SiGooglecloud': '#4285F4',
-  'SiMicrosoftazure': '#0089D6',
+  'VscAzure': '#0089D6',
   'SiRust': '#000000',
   'SiGo': '#00ADD8',
   'SiSwift': '#FA7343',
@@ -178,7 +181,7 @@ export const techColorMap: Record<string, string> = {
 
 export default function TechIconRenderer({ iconName, size = 16, color }: { iconName: string, size?: number, color?: string }) {
   if (!iconName) return <Code2 size={size} color={color} />;
-  
+
   let Icon = Code2;
   let iconColor = color || '#6b7280';
 
@@ -190,7 +193,7 @@ export default function TechIconRenderer({ iconName, size = 16, color }: { iconN
     // 2. Otherwise, normalize and look up in our friendly name map (e.g., 'next.js' -> 'SiNextdotjs')
     const normalizedName = iconName.toLowerCase().trim();
     const reactIconName = techNameMap[normalizedName];
-    
+
     if (reactIconName && IconRegistry[reactIconName]) {
       Icon = IconRegistry[reactIconName];
       iconColor = color || techColorMap[reactIconName] || iconColor;
