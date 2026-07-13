@@ -97,6 +97,14 @@
 }
 
 /* Marquee animation */
+@keyframes float-icon {
+  0%, 100% { transform: translateY(-3px) scale(1); }
+  50% { transform: translateY(3px) scale(1); }
+}
+.animate-float-icon {
+  animation: float-icon 4s ease-in-out infinite;
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }

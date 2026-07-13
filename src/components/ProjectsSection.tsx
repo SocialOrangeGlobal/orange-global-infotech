@@ -231,15 +231,16 @@ export default function ProjectsSection({
                   {techStack.length > 0 && (
                     <div className="flex flex-wrap gap-3 mb-8">
                       {techStack.map((tech, i) => (
-                        <motion.div
+                        <div
                           key={tech.name + i}
-                          animate={{ y: [-5, 5, -5] }}
-                          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.2 }}
-                          className="w-10 h-10 bg-white border border-gray-200 rounded-full shadow-sm flex items-center justify-center transition-transform hover:scale-110"
+                          className="animate-float-icon"
+                          style={{ animationDelay: `${i * 0.2}s` }}
                           title={tech.name}
                         >
-                          <TechIconRenderer iconName={tech.icon} color={tech.color} size={20} />
-                        </motion.div>
+                          <div className="w-10 h-10 bg-white border border-gray-200 rounded-full shadow-sm flex items-center justify-center transition-transform hover:scale-110 cursor-default">
+                            <TechIconRenderer iconName={tech.icon} color={tech.color} size={20} />
+                          </div>
+                        </div>
                       ))}
                     </div>
                   )}
