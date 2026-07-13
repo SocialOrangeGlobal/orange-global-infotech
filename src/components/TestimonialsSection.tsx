@@ -1,29 +1,32 @@
 'use client'
-
+import type { TestimonialItem } from '@/lib/types'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import { Star } from 'lucide-react'
 
-import { testimonials } from '@/lib/data'
-
-export default function TestimonialsSection() {
+export default function TestimonialsSection({
+  title = 'What our users say',
+  testimonials = []
+}: {
+  title?: string;
+  testimonials?: TestimonialItem[]
+}) {
   const [active, setActive] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
-    if (!isPaused) {
+    if (!isPaused && testimonials.length > 0) {
       timerRef.current = setInterval(() => {
         setActive((prev) => (prev + 1) % testimonials.length)
       }, 5000)
     }
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [isPaused, testimonials])
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [isPaused])
+  if (!testimonials || testimonials.length === 0) return null;
 
-  const t = testimonials[active]
+  const t = testimonials[active] ?? testimonials[0];
 
   return (
     <section id="testimonials" className="py-24 md:py-32 bg-[#FAFAFA] relative overflow-hidden">
@@ -31,20 +34,20 @@ export default function TestimonialsSection() {
 
         {/* Header */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#111111] tracking-tight">
-            What our users say
+            {title}
           </h2>
         </motion.div>
 
-        {/* Client logos tabs */}
+        {/* Author tabs -> Company Logos */}
         <motion.div
-          className="flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-16"
+          className="flex flex-wrap justify-center items-center gap-6 md:gap-12 mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -52,24 +55,26 @@ export default function TestimonialsSection() {
         >
           {testimonials.map((client, i) => (
             <button
-              key={client.clientName}
+              key={client.clientName + i}
               onClick={() => {
                 setActive(i)
                 setIsPaused(true)
-                setTimeout(() => setIsPaused(false), 10000) // pause for 10s after manual click
+                setTimeout(() => setIsPaused(false), 10000)
               }}
-              className={`relative px-6 py-3 rounded-xl transition-all duration-300 flex items-center justify-center ${active === i
-                ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]'
-                : 'hover:bg-white/50 opacity-50 grayscale hover:opacity-100 hover:grayscale-0'
+              className={`relative px-6 py-3 rounded-full transition-all duration-300 flex items-center justify-center ${active === i
+                ? 'bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] scale-105'
+                : 'hover:scale-105 opacity-40 hover:opacity-70 grayscale'
                 }`}
             >
-              <Image
-                src={client.logo}
-                alt={client.clientName}
-                width={120}
-                height={40}
-                className={`h-7 w-auto object-contain ${client.clientName === 'Microsoft' ? 'scale-[1.6]' : ''}`}
-              />
+              {client.logo ? (
+                <img
+                  src={client.logo}
+                  alt={client.clientName}
+                  className={`h-6 md:h-7 object-contain ${client.clientName === 'Microsoft' ? 'scale-[1.35] md:scale-[1.6]' : ''}`}
+                />
+              ) : (
+                <span className="font-semibold text-gray-600">{client.clientName}</span>
+              )}
             </button>
           ))}
         </motion.div>
@@ -83,39 +88,33 @@ export default function TestimonialsSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              initial={{ opacity: 0, scale: 0.98, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -10 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
               className="text-center relative px-6 md:px-12"
             >
-              {/* Quote text with large orange quotes */}
+              {/* Quote */}
               <div className="relative inline-block mb-12">
                 <span className="absolute -top-8 -left-8 text-6xl text-[#FF6B00] font-serif leading-none select-none">
                   &ldquo;
                 </span>
-
                 <blockquote className="text-2xl md:text-3xl text-[#111111] leading-relaxed font-serif text-pretty">
                   {t.quote}
                 </blockquote>
-
                 <span className="absolute -bottom-10 -right-8 text-6xl text-[#FF6B00] font-serif leading-none select-none">
                   &rdquo;
                 </span>
               </div>
 
-              {/* Author */}
-              <div className="flex flex-col items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center border-2 border-white shadow-sm">
-                  {/* Fallback avatar if no image */}
-                  <span className="text-gray-500 font-semibold text-sm">
-                    {t.author.charAt(0)}
-                  </span>
+              {/* Author Avatar and Info */}
+              <div className="flex flex-col items-center gap-4 mt-8">
+                <div className="w-10 h-10 rounded-full bg-[#E5E7EB] overflow-hidden flex items-center justify-center">
+                  <span className="text-gray-500 font-semibold text-sm">{(t.author || t.clientName || '?').charAt(0)}</span>
                 </div>
                 <div>
-                  <p className="text-[#111111] text-sm font-medium">
-                    {t.author} <span className="text-gray-400 font-normal ml-1">{t.title}</span>
-                  </p>
+                  <span className="text-[#111111] text-[13px] font-bold">{t.author} </span>
+                  <span className="text-gray-400 text-[13px] ml-1">{t.title}</span>
                 </div>
               </div>
             </motion.div>

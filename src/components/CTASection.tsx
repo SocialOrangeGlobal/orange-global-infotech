@@ -4,7 +4,24 @@ import { motion } from 'framer-motion'
 import { MessageSquare } from 'lucide-react'
 import HeroBubblePhysics from './animations/HeroBubblePhysics'
 
-export default function CTASection() {
+export default function CTASection({
+  title = 'Ready To Build Your Next Digital Solution?',
+  description = "Every Orange Global product is shaped by real production experience. We tackle the real problems in digital transformation, and we don't stop until they're solved.",
+  primaryButton = 'Discuss Your Project',
+  secondaryButton,
+  features = [
+    'Free Consultation',
+    'No Hidden Fees',
+    'NDA Protected',
+    '100% Satisfaction'
+  ]
+}: {
+  title?: string;
+  description?: string;
+  primaryButton?: string;
+  secondaryButton?: string;
+  features?: string[];
+}) {
   return (
     <section
       id="careers"
@@ -79,7 +96,7 @@ export default function CTASection() {
             className="font-heading font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-balance mb-6"
             style={{ color: '#0a0a0a', letterSpacing: '-0.03em' }}
           >
-            Ready To Build Your Next Digital Solution?
+            {title}
           </motion.h2>
 
           {/* Description */}
@@ -88,8 +105,7 @@ export default function CTASection() {
             className="text-xl leading-relaxed mb-12 text-pretty"
             style={{ color: '#5f6368' }}
           >
-            Every Orange Global product is shaped by real production experience. We tackle the real
-            problems in digital transformation, and we don&apos;t stop until they&apos;re solved.
+            {description}
           </motion.p>
 
           {/* CTAs */}
@@ -115,7 +131,7 @@ export default function CTASection() {
               }}
             >
               <MessageSquare size={18} />
-              Discuss Your Project
+              {primaryButton}
             </a>
           </motion.div>
 
@@ -124,15 +140,10 @@ export default function CTASection() {
             variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
             className="flex flex-wrap items-center justify-center gap-6 mt-14"
           >
-            {[
-              { label: 'Free Consultation', icon: '✦' },
-              { label: 'No Hidden Fees', icon: '✦' },
-              { label: 'NDA Protected', icon: '✦' },
-              { label: '100% Satisfaction', icon: '✦' },
-            ].map((b) => (
-              <div key={b.label} className="flex items-center gap-2 text-sm" style={{ color: '#5f6368' }}>
-                <span className="text-xs" style={{ color: '#f97315' }}>{b.icon}</span>
-                {b.label}
+            {features.map((feature: string) => (
+              <div key={feature} className="flex items-center gap-2 text-sm" style={{ color: '#5f6368' }}>
+                <span className="text-xs" style={{ color: '#f97315' }}>✦</span>
+                {feature}
               </div>
             ))}
           </motion.div>

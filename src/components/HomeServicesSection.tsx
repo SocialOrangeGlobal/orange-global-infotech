@@ -1,11 +1,25 @@
 'use client'
-
+import type { Service } from '@/lib/types'
+import TechIconRenderer from './TechIconRenderer';
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Check, Layers, Globe, Code2, Smartphone, Cloud } from 'lucide-react'
+import { ArrowUpRight, Check, Layers, Globe, Code2, Smartphone, Cloud, BrainCircuit, Database, ShieldCheck, Cpu, Server } from 'lucide-react'
 import Link from 'next/link'
-import { services } from '@/lib/data'
 
-function ServiceVisual({ service }: { service: typeof services[0] }) {
+const IconMap: Record<string, React.ElementType> = {
+  Globe,
+  Code2,
+  Smartphone,
+  Cloud,
+  Layers,
+  Check,
+  BrainCircuit,
+  Database,
+  ShieldCheck,
+  Cpu,
+  Server
+};
+
+function ServiceVisual({ service }: { service: any }) {
   return (
     <div className="relative w-full group cursor-pointer">
       {/* Outer card */}
@@ -16,42 +30,45 @@ function ServiceVisual({ service }: { service: typeof services[0] }) {
         {/* Header stripe */}
         <div
           className="flex items-center gap-3 px-6 py-4 border-b border-gray-100"
-          style={{ background: `${service.accentColor}08` }}
+          style={{ background: `${service.metadata?.accentColor || '#f97316'}08` }}
         >
           <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ backgroundColor: `${service.accentColor}20` }}
+            className="w-8 h-8 rounded-lg flex items-center justify-center"
+            style={{ backgroundColor: `${service.metadata?.accentColor || '#f97316'}20` }}
           >
-            <service.badgeIcon size={16} style={{ color: service.accentColor }} />
+            {(() => {
+               const Icon = (service.icon && IconMap[service.icon]) ? IconMap[service.icon] : Layers;
+               return Icon ? <Icon size={16} style={{ color: service.metadata?.accentColor || '#f97316' }} /> : null;
+            })()}
           </div>
-          <span className="text-sm font-semibold" style={{ color: service.accentColor }}>
-            {service.badge}
+          <span className="text-sm font-semibold" style={{ color: service.metadata?.accentColor || '#f97316' }}>
+            {service.metadata?.slugName || service.metadata?.badge || service.title}
           </span>
           {/* Dots */}
           <div className="ml-auto flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
             <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: service.accentColor }} />
+            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: service.metadata?.accentColor || '#f97316' }} />
           </div>
         </div>
 
         {/* Sub-service cards grid */}
         <div className="grid grid-cols-2 gap-px bg-gray-100">
-          {service.subServices.map((sub, i) => (
+          {(service.metadata?.subServices || []).map((sub: any, i: number) => (
             <div key={sub.title} className="bg-white p-5 flex flex-col gap-3">
               <div className="flex items-center gap-2 mb-1">
                 <div
                   className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: `${service.accentColor}15` }}
+                  style={{ backgroundColor: `${service.metadata?.accentColor || '#f97316'}15` }}
                 >
-                  <Layers size={12} style={{ color: service.accentColor }} />
+                  <Layers size={12} style={{ color: service.metadata?.accentColor || '#f97316' }} />
                 </div>
                 <span className="text-[13px] font-semibold text-[#111111] leading-tight">{sub.title}</span>
               </div>
               <ul className="space-y-1.5">
-                {sub.features.map((f) => (
+                {(sub.features || []).map((f: string) => (
                   <li key={f} className="flex items-center gap-1.5">
-                    <Check size={10} style={{ color: service.accentColor }} className="flex-shrink-0" />
+                    <Check size={10} style={{ color: service.metadata?.accentColor || '#f97316' }} className="flex-shrink-0" />
                     <span className="text-[11px] text-gray-500 leading-snug">{f}</span>
                   </li>
                 ))}
@@ -62,35 +79,51 @@ function ServiceVisual({ service }: { service: typeof services[0] }) {
 
         {/* Tech Stack footer */}
         <div className="px-6 py-4 border-t border-gray-100 flex flex-wrap gap-3 bg-gray-50/50">
-          {service.techStack.map((tech, i) => (
-            <motion.div
-              key={tech.name}
-              animate={{ y: [-4, 4, -4] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.2 }}
-              className="w-8 h-8 bg-white border border-gray-200 rounded-full shadow-sm flex items-center justify-center transition-transform hover:scale-110"
-              title={tech.name}
-            >
-              <tech.icon size={16} color={tech.color} />
-            </motion.div>
-          ))}
+          {(service.metadata?.techStack || []).map((tech: any, i: number) => {
+            return (
+              <motion.div
+                key={tech.name}
+                animate={{ y: [-4, 4, -4] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.2 }}
+                className="w-8 h-8 bg-white border border-gray-200 rounded-full shadow-sm flex items-center justify-center transition-transform hover:scale-110"
+                title={tech.name}
+              >
+                <TechIconRenderer iconName={tech.icon} color={tech.color || '#333'} size={16} />
+              </motion.div>
+            )
+          })}
         </div>
       </div>
 
       {/* Glow beneath */}
       <div
         className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3/4 h-10 rounded-full blur-2xl opacity-25"
-        style={{ background: service.accentColor }}
+        style={{ background: service.metadata?.accentColor || '#f97316' }}
       />
     </div>
   )
 }
 
-export default function HomeServicesSection() {
+export default function HomeServicesSection({
+  services,
+  title = 'Meet our services',
+  description = 'From web development to cloud infrastructure and everything in between. Pick the solution that powers your business.'
+}: {
+  services: Service[];
+  title?: string;
+  description?: string;
+}) {
   return (
-    <section id="services" className="py-24 md:py-32 bg-[#FAFAFA]">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-orange-50/50 rounded-full blur-3xl" />
+        <div className="absolute -bottom-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-50/50 rounded-full blur-3xl" />
+      </div>
 
-        {/* Section Header — mirrors ProjectsSection exactly */}
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Section Header */}
         <motion.div
           className="flex flex-col items-center text-center max-w-3xl mx-auto mb-24"
           initial={{ opacity: 0, y: 30 }}
@@ -113,12 +146,10 @@ export default function HomeServicesSection() {
             </div>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#111111] mb-5 tracking-tight">
-            Meet our services
+            {title}
           </h2>
           <p className="text-lg text-gray-500">
-            From web development to cloud infrastructure and everything in between.{' '}
-            <br className="hidden md:block" />
-            Pick the solution that powers your business.
+            {description}
           </p>
         </motion.div>
 
@@ -136,9 +167,15 @@ export default function HomeServicesSection() {
             >
               {/* Text Content */}
               <div className="w-full lg:w-[38%] flex flex-col items-center lg:items-start text-center lg:text-left flex-shrink-0">
-                <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg ${service.lightBg} ${service.textColor} font-semibold text-sm mb-5`}>
-                  <service.badgeIcon size={15} />
-                  <span>{service.badge}</span>
+                <div 
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium text-[13px] mb-5"
+                  style={{ backgroundColor: `${service.metadata?.accentColor || '#f97316'}15`, color: service.metadata?.accentColor || '#f97316' }}
+                >
+                  {(() => {
+                    const Icon = (service.icon && IconMap[service.icon]) ? IconMap[service.icon] : Layers;
+                    return Icon ? <Icon size={15} /> : null;
+                  })()}
+                  <span>{service.metadata?.badge || service.title || "Service"}</span>
                 </div>
 
                 <h3 className="text-3xl md:text-[2.25rem] font-semibold text-[#111111] mb-5 leading-tight">
@@ -151,7 +188,7 @@ export default function HomeServicesSection() {
 
                 {/* Includes list */}
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {service.includes.map((item) => (
+                  {service.features?.map((item: string) => (
                     <span key={item} className="px-3 py-1 bg-white border border-gray-200 text-gray-600 text-xs font-medium rounded-full shadow-sm">
                       {item}
                     </span>
@@ -159,14 +196,14 @@ export default function HomeServicesSection() {
                 </div>
 
                 <Link
-                  href={service.href}
+                  href={`/services/${service.slug}`}
                   className="inline-flex items-center gap-2 px-6 py-3 text-white font-medium rounded-xl transition-all duration-300 hover:opacity-90 hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg text-[15px] mt-8"
                   style={{
-                    backgroundColor: service.accentColor,
-                    boxShadow: `0 8px 20px -6px ${service.accentColor}80`,
+                    backgroundColor: service.metadata?.accentColor || '#111111',
+                    boxShadow: `0 8px 20px -6px ${service.metadata?.accentColor || '#111111'}80`,
                   }}
                 >
-                  {service.buttonText}
+                  {service.metadata?.buttonText || 'Explore Service'}
                   <ArrowUpRight size={16} />
                 </Link>
               </div>

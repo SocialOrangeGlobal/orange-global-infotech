@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { FooterContent } from '@/lib/types'
 
 // Custom SVGs for Brands
 const FacebookIcon = ({ className }: { className?: string }) => (
@@ -26,52 +27,31 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-const columns = [
-  {
-    title: 'Explore',
-    links: [
-      { label: 'About', href: '/about' },
-      { label: 'Customer Stories', href: '#testimonials' },
-      { label: 'Press Kit', href: '#' },
-    ],
-  },
-  {
-    title: 'Services',
-    links: [
-      { label: 'Web Development', href: '/services' },
-      { label: 'Mobile Apps', href: '/services' },
-      { label: 'Cloud Solutions', href: '/services' },
-      { label: 'UI/UX Design', href: '/services' },
-      { label: 'Consulting', href: '/services' },
-    ],
-  },
-  {
-    title: 'Help',
-    links: [
-      { label: 'FAQ', href: '#faq' },
-      { label: 'Discord', href: '#' },
-      { label: 'Contact Us', href: '/contact' },
-      { label: 'Status', href: '#' },
-    ],
-  },
-  {
-    title: 'Contact Us',
-    links: [
-      { label: 'info@orangeglobal.com', href: 'mailto:info@orangeglobal.com' },
-      { label: '+91 9592290407', href: 'tel:+91 9592290407' },
-      { label: 'SCO 3, Level 1, Sector 41-D,\nChandigarh 160036', href: '/contact' },
-    ],
-  },
-]
+const TwitterIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+)
 
-const socials = [
-  { icon: FacebookIcon, href: '#', label: 'Facebook' },
-  { icon: DiscordIcon, href: '#', label: 'Discord' },
-  { icon: LinkedinIcon, href: '#', label: 'LinkedIn' },
-  { icon: InstagramIcon, href: '#', label: 'Instagram' },
-]
+const YoutubeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+  </svg>
+)
 
-export default function Footer() {
+const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
+  Facebook: FacebookIcon,
+  Discord: DiscordIcon,
+  LinkedIn: LinkedinIcon,
+  Instagram: InstagramIcon,
+  Twitter: TwitterIcon,
+  YouTube: YoutubeIcon,
+}
+
+export default function Footer({ footerData }: { footerData?: FooterContent }) {
+  const columns = footerData?.columns || [];
+  const socials = footerData?.socials || [];
+
   return (
     <footer className="bg-[#202020] text-white py-10 md:py-14 lg:py-16">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
@@ -95,42 +75,50 @@ export default function Footer() {
               Professional digital solutions for global businesses
             </p>
 
-            <div className="flex items-center gap-3">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="w-10 h-10 rounded-[10px] bg-white/[0.08] hover:bg-white/[0.15] flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <s.icon className="w-[18px] h-[18px]" />
-                </a>
-              ))}
-            </div>
+            {/* Dynamic Socials */}
+            {socials.length > 0 && (
+              <div className="flex items-center gap-3">
+                {socials.map((s, idx) => {
+                  const Icon = ICON_MAP[s.label] || FacebookIcon; // fallback to FB
+                  return (
+                    <a
+                      key={s.label + idx}
+                      href={s.href}
+                      aria-label={s.label}
+                      className="w-10 h-10 rounded-[10px] bg-white/[0.08] hover:bg-white/[0.15] flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                    >
+                      <Icon className="w-[18px] h-[18px]" />
+                    </a>
+                  )
+                })}
+              </div>
+            )}
           </div>
 
-          {/* Links Columns (Right) */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-nowrap gap-x-8 sm:gap-x-16 gap-y-10 lg:gap-x-28">
-            {columns.map((col, idx) => (
-              <div key={col.title} className={`${idx === columns.length - 1 ? 'col-span-2 sm:col-span-1' : ''}`}>
-                <h4 className="text-white text-sm font-semibold mb-6 tracking-wide">
-                  {col.title}
-                </h4>
-                <ul className="space-y-4">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="text-[13px] font-medium text-white/60 hover:text-white transition-colors duration-200 whitespace-pre-line leading-relaxed block"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          {/* Dynamic Links Columns (Right) */}
+          {columns.length > 0 && (
+            <div className="grid grid-cols-2 sm:flex sm:flex-nowrap gap-x-8 sm:gap-x-16 gap-y-10 lg:gap-x-28">
+              {columns.map((col, idx) => (
+                <div key={col.title + idx} className={`${idx === columns.length - 1 ? 'col-span-2 sm:col-span-1' : ''}`}>
+                  <h4 className="text-white text-sm font-semibold mb-6 tracking-wide">
+                    {col.title}
+                  </h4>
+                  <ul className="space-y-4">
+                    {(col.links || []).map((link, linkIdx) => (
+                      <li key={link.label + linkIdx}>
+                        <Link
+                          href={link.href}
+                          className="text-[13px] font-medium text-white/60 hover:text-white transition-colors duration-200 whitespace-pre-line leading-relaxed block"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Bottom Section */}
@@ -139,10 +127,10 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Orange Global Infotech. All Rights Reserved
           </p>
           <div className="flex items-center gap-8">
-            <Link href="#" className="text-white/60 hover:text-white text-[13px] font-medium transition-colors duration-200">
+            <Link href="/terms-conditions" className="text-white/60 hover:text-white text-[13px] font-medium transition-colors duration-200">
               Terms and Conditions
             </Link>
-            <Link href="#" className="text-white/60 hover:text-white text-[13px] font-medium transition-colors duration-200">
+            <Link href="/privacy-policy" className="text-white/60 hover:text-white text-[13px] font-medium transition-colors duration-200">
               Privacy Policy
             </Link>
           </div>

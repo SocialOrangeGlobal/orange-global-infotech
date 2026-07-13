@@ -1,4 +1,5 @@
 'use client'
+import { getIcon } from '@/lib/iconMap';
 
 import { useRef, useEffect, useState } from 'react'
 import { motion, useMotionValue, useAnimationFrame, MotionValue } from 'framer-motion'
@@ -302,12 +303,12 @@ function BubbleNode({
             filter: isWhite ? 'none' : 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
           }}
         >
-          {config.icon && (
-            <config.icon
+          {config.icon && (() => {
+            const Icon = getIcon(config.icon); return <Icon
               size={apiRef.current.radius * 0.9}
               strokeWidth={apiRef.current.radius < 18 ? 2.5 : 2}
             />
-          )}
+          })()}
         </span>
 
         {/* Inner brilliant highlight for glassy feel */}

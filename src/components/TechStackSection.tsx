@@ -38,8 +38,26 @@ const allTechs = [
   { name: 'PyTorch', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg' },
 ]
 
-const row1 = [...allTechs.slice(0, 15), ...allTechs.slice(0, 15)]
-const row2 = [...allTechs.slice(15), ...allTechs.slice(15)]
+const deviconMap: Record<string, string> = {
+  React: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
+  NextJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg',
+  Vue: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg',
+  Tailwind: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+  TypeScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+  NodeJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
+  NestJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg',
+  Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+  GraphQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg',
+  Go: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg',
+  PostgreSql: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+  MongoDb: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg',
+  Redis: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
+  Aws: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+  Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+  Flutter: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg',
+  Swift: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg',
+  Kotlin: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg'
+};
 
 function TechIcon({ name, icon }: { name: string; icon: string }) {
   return (
@@ -57,7 +75,28 @@ function TechIcon({ name, icon }: { name: string; icon: string }) {
   )
 }
 
-export default function TechStackSection() {
+export default function TechStackSection({
+  title = 'Works with the tools you already use',
+  description = 'Deep integrations with the most popular frameworks, databases, cloud platforms, and modern development tools.',
+  categories
+}: {
+  title?: string;
+  description?: string;
+  categories?: any[];
+}) {
+  let flatTechs = allTechs;
+  if (categories && categories.length > 0) {
+    flatTechs = categories.flatMap(cat => cat.technologies || []).map(t => ({
+      name: t.name,
+      icon: deviconMap[t.icon] || deviconMap.React // fallback
+    }));
+  }
+
+  const half = Math.ceil(flatTechs.length / 2);
+  // Repeat array to ensure the marquee fills the screen
+  const row1 = [...flatTechs.slice(0, half), ...flatTechs.slice(0, half), ...flatTechs.slice(0, half), ...flatTechs.slice(0, half)];
+  const row2 = [...flatTechs.slice(half), ...flatTechs.slice(half), ...flatTechs.slice(half), ...flatTechs.slice(half)];
+
   return (
     <section id="tech" className="py-24 md:py-32 bg-white relative overflow-hidden">
       {/* Dot pattern */}
@@ -99,12 +138,10 @@ export default function TechStackSection() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-4xl md:text-5xl font-semibold text-[#111111] mb-5 tracking-tight">
-            Works with the tools<br className="hidden md:block" /> you already use
+            {title}
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-            Deep integrations with the most popular frameworks, databases,{' '}
-            <br className="hidden md:block" />
-            cloud platforms, and modern development tools.
+            {description}
           </p>
         </motion.div>
 

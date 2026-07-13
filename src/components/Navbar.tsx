@@ -3,12 +3,17 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
-import { navLinks } from '@/lib/data'
+interface NavLink {
+  label: string;
+  href: string;
+}
 
-export default function Navbar() {
+export default function Navbar({ navLinks = [] }: { navLinks?: NavLink[] }) {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -47,16 +52,29 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <ul className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-[15px] font-medium text-gray-700 hover:text-black transition-colors duration-200 flex items-center gap-1"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+              return (
+                <li key={link.href} className="relative">
+                  <Link
+                    href={link.href}
+                    className={`text-[15px] transition-colors duration-200 flex items-center gap-1 ${
+                      isActive ? 'text-[#111111] font-semibold' : 'font-medium text-gray-600 hover:text-[#111111]'
+                    }`}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-indicator"
+                        className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-[#FF6B00] rounded-full"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           {/* Right Navigation */}
@@ -91,23 +109,28 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
           >
             <ul className="flex flex-col items-center gap-2 w-full max-w-xs">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="w-full"
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block w-full text-center py-3 text-[17px] font-medium text-[#111111] hover:text-gray-600 transition-colors border-b border-[#111111]/[0.05]"
+              {navLinks.map((link, i) => {
+                const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+                return (
+                  <motion.li
+                    key={link.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="w-full"
                   >
-                    {link.label}
-                  </Link>
-                </motion.li>
-              ))}
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`block w-full text-center py-3 text-[17px] transition-colors border-b border-[#111111]/[0.05] ${
+                        isActive ? 'text-[#FF6B00] font-semibold' : 'font-medium text-[#111111] hover:text-gray-600'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.li>
+                );
+              })}
             </ul>
             <Link
               href="/contact"

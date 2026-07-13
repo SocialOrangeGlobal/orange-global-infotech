@@ -3,6 +3,10 @@ import { Inter, Sora } from 'next/font/google'
 import './globals.css'
 import GlobalClickBubbles from '@/components/animations/GlobalClickBubbles'
 import CustomCursor from '@/components/animations/CustomCursor'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import { fetchWebsiteContent } from '@/lib/api'
+import type { NavContent, FooterContent } from '@/lib/types'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -67,17 +71,30 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function RootLayout({
+export const dynamic = 'force-dynamic'
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const [navRes, footerRes] = await Promise.all([
+    fetchWebsiteContent('nav'),
+    fetchWebsiteContent('footer')
+  ]);
+
+  let navLinks = (navRes?.content as NavContent)?.links || [];
+  if (!navLinks.some(link => link.href === '/')) {
+    navLinks = [{ label: 'Home', href: '/' }, ...navLinks];
+  }
+  const footerData = (footerRes?.content as FooterContent) || {};
+
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${sora.variable} bg-[#FAFAFA]`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased overflow-x-hidden" suppressHydrationWarning>
-        {/* <CustomCursor />
-        <GlobalClickBubbles /> */}
+        <Navbar navLinks={navLinks} />
         {children}
+        <Footer footerData={footerData} />
       </body>
     </html>
   )

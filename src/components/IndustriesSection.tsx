@@ -1,86 +1,55 @@
 'use client'
-
+import { getIcon } from '@/lib/iconMap'
+import type { IndustryItem } from '@/lib/types'
 import { motion } from 'framer-motion'
-import { Heart, GraduationCap, DollarSign, Home, ShoppingBag, Users, Factory, Truck, ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
-const industries = [
-  {
-    icon: Heart,
-    title: 'Healthcare',
-    description: 'Patient management systems, telemedicine platforms, and health data analytics.',
-    color: '#EF4444',
-    lightBg: 'bg-red-50',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Education',
-    description: 'LMS platforms, online learning tools, and student engagement applications.',
-    color: '#3B82F6',
-    lightBg: 'bg-blue-50',
-  },
-  {
-    icon: DollarSign,
-    title: 'Finance',
-    description: 'Fintech solutions, payment gateways, banking portals, and investment dashboards.',
-    color: '#10B981',
-    lightBg: 'bg-emerald-50',
-  },
-  {
-    icon: Home,
-    title: 'Real Estate',
-    description: 'Property listing platforms, virtual tours, CRM, and transaction management.',
-    color: '#F59E0B',
-    lightBg: 'bg-amber-50',
-  },
-  {
-    icon: ShoppingBag,
-    title: 'Retail & E-Commerce',
-    description: 'E-commerce stores, POS systems, inventory management, and loyalty programs.',
-    color: '#EC4899',
-    lightBg: 'bg-pink-50',
-  },
-  {
-    icon: Users,
-    title: 'Recruitment & HR',
-    description: 'ATS systems, job portals, candidate tracking, and HR automation platforms.',
-    color: '#A855F7',
-    lightBg: 'bg-purple-50',
-  },
-  {
-    icon: Factory,
-    title: 'Manufacturing',
-    description: 'ERP systems, supply chain management, quality control, and IoT integrations.',
-    color: '#FF6B00',
-    lightBg: 'bg-orange-50',
-  },
-  {
-    icon: Truck,
-    title: 'Logistics',
-    description: 'Fleet management, route optimization, shipment tracking, and warehouse automation.',
-    color: '#0EA5E9',
-    lightBg: 'bg-sky-50',
-  },
-]
+const COLOR_PALETTE = ['#EF4444', '#3B82F6', '#10B981', '#F59E0B', '#EC4899', '#A855F7', '#FF6B00', '#0EA5E9']
 
-// Duplicate for seamless marquee
-const row1 = [...industries, ...industries]
-const row2 = [...industries.slice(4), ...industries.slice(0, 4), ...industries.slice(4), ...industries.slice(0, 4)]
+function IndustryChip({ industry, index }: { industry: IndustryItem, index: number }) {
+  const Icon = getIcon(industry.icon || 'Factory');
+  const color = industry.color || COLOR_PALETTE[index % COLOR_PALETTE.length];
 
-function IndustryChip({ industry }: { industry: typeof industries[0] }) {
   return (
-    <div className="shrink-0 group flex items-center gap-3 px-5 py-3.5 bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-default hover:border-gray-200 hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] transition-all duration-300 hover:-translate-y-1 mx-2.5 min-w-[175px]">
+    <div className="shrink-0 group flex items-center gap-3 px-6 py-3 bg-white rounded-full border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-default hover:border-gray-200 hover:shadow-[0_8px_28px_rgba(0,0,0,0.09)] transition-all duration-300 hover:-translate-y-1 mx-2.5 min-w-[175px]">
       <div
-        className={`w-9 h-9 ${industry.lightBg} rounded-xl flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110`}
+        className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+        style={{ backgroundColor: `${color}15` }}
       >
-        <industry.icon size={17} style={{ color: industry.color }} />
+        <Icon size={17} style={{ color }} />
       </div>
-      <span className="font-semibold text-sm text-[#111111] whitespace-nowrap">{industry.title}</span>
+      <span className="font-semibold text-sm text-[#111111] whitespace-nowrap">{industry.name}</span>
     </div>
   )
 }
 
-export default function IndustriesSection() {
+export default function IndustriesSection({
+  title = 'Built for every industry',
+  description = 'Deep domain expertise across various sectors to deliver tailored, high-impact digital solutions.',
+  industriesData = []
+}: {
+  title?: string;
+  description?: string;
+  industriesData?: any[];
+}) {
+
+  // Safety check to ensure we have data
+  if (!industriesData || industriesData.length === 0) return null;
+
+  // Duplicate for seamless marquee
+  const { row1, row2 } = useMemo(() => {
+    const data = industriesData as IndustryItem[];
+    // To ensure the marquee has enough items to scroll smoothly, we duplicate the array.
+    const r1 = [...data, ...data, ...data];
+    const mid = Math.ceil(data.length / 2);
+    // Try to stagger row 2 by slicing from the middle
+    const r2Base = [...data.slice(mid), ...data.slice(0, mid)];
+    const r2 = [...r2Base, ...r2Base, ...r2Base];
+    return { row1: r1, row2: r2 };
+  }, [industriesData]);
+
   return (
     <section id="industries" className="py-24 md:py-32 bg-[#FAFAFA] relative overflow-hidden">
       {/* Dot pattern */}
@@ -103,12 +72,10 @@ export default function IndustriesSection() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-4xl md:text-5xl font-semibold text-[#111111] mb-5 tracking-tight">
-            Built for every industry
+            {title}
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-            Domain expertise across diverse verticals —{' '}
-            <br className="hidden md:block" />
-            delivering solutions tailored to each industry&apos;s unique challenges.
+            {description}
           </p>
         </motion.div>
 
@@ -118,7 +85,7 @@ export default function IndustriesSection() {
           <div className="absolute right-0 top-0 bottom-0 w-44 z-10 bg-gradient-to-l from-[#FAFAFA] to-transparent" />
           <div className="flex animate-marquee py-3">
             {row1.map((ind, i) => (
-              <IndustryChip key={`r1-${i}`} industry={ind} />
+              <IndustryChip key={`r1-${i}`} industry={ind} index={i % (industriesData.length || 1)} />
             ))}
           </div>
         </div>
@@ -129,7 +96,7 @@ export default function IndustriesSection() {
           <div className="absolute right-0 top-0 bottom-0 w-44 z-10 bg-gradient-to-l from-[#FAFAFA] to-transparent" />
           <div className="flex py-3" style={{ animation: 'marquee 35s linear infinite reverse' }}>
             {row2.map((ind, i) => (
-              <IndustryChip key={`r2-${i}`} industry={ind} />
+              <IndustryChip key={`r2-${i}`} industry={ind} index={(i + Math.ceil(industriesData.length / 2)) % (industriesData.length || 1)} />
             ))}
           </div>
         </div>

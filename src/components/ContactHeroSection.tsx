@@ -32,7 +32,7 @@ function RotatingText({ words }: { words: string[] }) {
   )
 }
 
-export default function ContactHeroSection() {
+export default function ContactHeroSection({ contactData }: { contactData?: any }) {
   const ref = useRef<HTMLElement>(null)
   useScroll({ target: ref, offset: ['start start', 'end start'] })
 
@@ -121,8 +121,7 @@ export default function ContactHeroSection() {
             variants={itemVariants}
             className="font-semibold text-4xl sm:text-5xl md:text-6xl lg:text-[4.75rem] text-[#111111] leading-[1.05] tracking-tight text-balance mb-6"
           >
-            Let's Build <br className="hidden md:block" />
-            Together
+            <>Let's Build <br className="hidden md:block" />Together</>
           </motion.h1>
 
           {/* Sub */}

@@ -24,7 +24,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
             className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FAFAFA]"
           >
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -32,7 +32,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
             >
               {/* Logo */}
               <img src="/logo.png" alt="Orange Global Infotech" className="w-40 sm:w-48 md:w-56 mb-6 sm:mb-8" />
-              
+
               {/* Animated Dots (Pulze style) */}
               <div className="flex flex-col items-center gap-2 sm:gap-3">
                 <div className="flex gap-2 sm:gap-2.5">

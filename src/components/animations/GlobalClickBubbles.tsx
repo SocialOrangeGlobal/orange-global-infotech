@@ -29,10 +29,10 @@ export default function GlobalClickBubbles() {
 
   const handleClick = useCallback((e: MouseEvent) => {
     const { clientX, clientY } = e
-    
+
     // Spawn 4 to 8 bubbles on click
     const numBubbles = Math.floor(Math.random() * 5) + 4
-    
+
     const newBubbles: Bubble[] = Array.from({ length: numBubbles }).map(() => {
       const size = Math.random() * 8 + 12 // 12px to 20px font size
       const color = COLORS[Math.floor(Math.random() * COLORS.length)]
@@ -74,21 +74,21 @@ export default function GlobalClickBubbles() {
         {bubbles.map(bubble => (
           <motion.div
             key={bubble.id}
-            initial={{ 
-              opacity: 0.8, 
+            initial={{
+              opacity: 0.8,
               scale: 0.5,
-              x: bubble.x - 20, 
-              y: bubble.y - 10 
+              x: bubble.x - 20,
+              y: bubble.y - 10
             }}
-            animate={{ 
-              opacity: 0, 
+            animate={{
+              opacity: 0,
               scale: 1,
-              x: bubble.x - 20 + Math.cos(bubble.angle) * bubble.distance, 
-              y: bubble.y - 10 + Math.sin(bubble.angle) * bubble.distance 
+              x: bubble.x - 20 + Math.cos(bubble.angle) * bubble.distance,
+              y: bubble.y - 10 + Math.sin(bubble.angle) * bubble.distance
             }}
-            transition={{ 
-              duration: bubble.duration, 
-              ease: "easeOut" 
+            transition={{
+              duration: bubble.duration,
+              ease: "easeOut"
             }}
             className="absolute font-mono font-bold whitespace-nowrap pointer-events-none"
             style={{
