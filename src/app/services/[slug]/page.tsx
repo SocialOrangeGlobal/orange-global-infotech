@@ -7,9 +7,10 @@ import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const services = await fetchServices()
-  const service = services.find(s => s.slug === params.slug)
+  const service = services.find(s => s.slug === resolvedParams.slug)
   
   if (!service) return { title: 'Service Not Found' }
   
@@ -19,13 +20,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const [services, ctaRes] = await Promise.all([
     fetchServices(),
     fetchCTAContent(),
   ])
   
-  const service = services.find(s => s.slug === params.slug)
+  const service = services.find(s => s.slug === resolvedParams.slug)
   
   if (!service) {
     notFound()

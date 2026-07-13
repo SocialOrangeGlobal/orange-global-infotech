@@ -8,9 +8,10 @@ import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const projects = await fetchProjects()
-  const project = projects.find(p => p.slug === params.slug)
+  const project = projects.find(p => p.slug === resolvedParams.slug)
   
   if (!project) return { title: 'Project Not Found' }
   
@@ -20,13 +21,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const [projects, ctaRes] = await Promise.all([
     fetchProjects(),
     fetchCTAContent(),
   ])
   
-  const project = projects.find(p => p.slug === params.slug)
+  const project = projects.find(p => p.slug === resolvedParams.slug)
   
   if (!project) {
     notFound()
