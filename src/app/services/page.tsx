@@ -4,9 +4,15 @@ import ProcessSection from '@/components/ProcessSection'
 import CTASection from '@/components/CTASection'
 import { fetchServices, fetchProcessContent, fetchCTAContent } from '@/lib/api'
 
-export const metadata = {
-  title: 'Our Services | Orange Global Infotech',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Our Services',
   description: 'Explore our comprehensive web development, software development, mobile app development, and cloud solutions.',
+  openGraph: {
+    title: 'Our Services | Orange Global Infotech',
+    description: 'Explore our comprehensive web development, software development, mobile app development, and cloud solutions.',
+  },
 }
 
 export const dynamic = 'force-dynamic'

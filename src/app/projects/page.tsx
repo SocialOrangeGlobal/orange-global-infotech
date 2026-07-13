@@ -4,9 +4,15 @@ import TechStackSection from '@/components/TechStackSection'
 import CTASection from '@/components/CTASection'
 import { fetchProjects, fetchTechStack, fetchCTAContent } from '@/lib/api'
 
-export const metadata = {
-  title: 'Our Projects | Orange Global Infotech',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Our Projects',
   description: 'Explore our portfolio of cutting-edge web applications, robust software systems, and engaging mobile platforms.',
+  openGraph: {
+    title: 'Our Projects | Orange Global Infotech',
+    description: 'Explore our portfolio of cutting-edge web applications, robust software systems, and engaging mobile platforms.',
+  },
 }
 
 export const dynamic = 'force-dynamic'

@@ -3,9 +3,15 @@ import AboutSection from '@/components/AboutSection'
 import CTASection from '@/components/CTASection'
 import { fetchWhyChooseUs, fetchCTAContent } from '@/lib/api'
 
-export const metadata = {
-  title: 'About Us | Orange Global Infotech',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us',
   description: 'Learn more about Orange Global Infotech, our mission, our values, and the team behind our innovative digital solutions.',
+  openGraph: {
+    title: 'About Us | Orange Global Infotech',
+    description: 'Learn more about Orange Global Infotech, our mission, our values, and the team behind our innovative digital solutions.',
+  },
 }
 
 export const dynamic = 'force-dynamic'

@@ -9,7 +9,9 @@ const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRender
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+import type { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const services = await fetchServices()
   const service = services.find(s => s.slug === resolvedParams.slug)
@@ -17,8 +19,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!service) return { title: 'Service Not Found' }
   
   return {
-    title: `${service.title} | Orange Global Infotech`,
+    title: service.title,
     description: service.shortDescription || service.description,
+    openGraph: {
+      title: `${service.title} | Orange Global Infotech`,
+      description: service.shortDescription || service.description,
+    },
   }
 }
 

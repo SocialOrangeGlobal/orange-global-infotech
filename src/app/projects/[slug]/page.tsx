@@ -9,7 +9,9 @@ import Image from 'next/image'
 
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+import type { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const projects = await fetchProjects()
   const project = projects.find(p => p.slug === resolvedParams.slug)
@@ -17,8 +19,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!project) return { title: 'Project Not Found' }
   
   return {
-    title: `${project.title} | Orange Global Infotech`,
+    title: project.title,
     description: project.description,
+    openGraph: {
+      title: `${project.title} | Orange Global Infotech`,
+      description: project.description,
+      images: project.image ? [{ url: project.image }] : [],
+    },
   }
 }
 

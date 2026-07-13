@@ -24,7 +24,10 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://orangeglobalinfotech.com'),
-  title: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
+  title: {
+    default: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
+    template: '%s | Orange Global Infotech',
+  },
   description:
     'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
   keywords: [
@@ -36,10 +39,28 @@ export const metadata: Metadata = {
     'Orange Global Infotech',
   ],
   authors: [{ name: 'Orange Global Infotech' }],
+  creator: 'Orange Global Infotech',
+  publisher: 'Orange Global Infotech',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://orangeglobalinfotech.com',
+  },
   openGraph: {
     title: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
     description:
       'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
+    url: 'https://orangeglobalinfotech.com',
+    siteName: 'Orange Global Infotech',
     type: 'website',
     locale: 'en_US',
     images: [
@@ -56,6 +77,7 @@ export const metadata: Metadata = {
     title: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
     description:
       'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
+    creator: '@OrangeGlobal', // Example handle
     images: ['/logo.png'],
   },
   icons: {
