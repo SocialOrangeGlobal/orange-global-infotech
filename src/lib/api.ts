@@ -50,20 +50,6 @@ export async function fetchWebsiteContent<T = Record<string, unknown>>(
   return apiFetch<WebsiteContent<T> | null>(`/website-content/${sectionKey}`, null);
 }
 
-// ─── Typed convenience helpers ────────────────────────────────────────────────
-export const fetchHeroContent = () => fetchWebsiteContent<HeroContent>('hero');
-export const fetchProcessContent = () => fetchWebsiteContent<ProcessContent>('process');
-export const fetchCTAContent = () => fetchWebsiteContent<CTAContent>('cta');
-export const fetchTestimonials = () => fetchWebsiteContent<TestimonialsContent>('testimonials');
-export const fetchIndustries = () => fetchWebsiteContent<IndustriesContent>('industries');
-export const fetchFAQ = () => fetchWebsiteContent<FAQContent>('faqs');
-export const fetchSolutions = () => fetchWebsiteContent<SolutionsContent>('solutions');
-export const fetchTechStack = () => fetchWebsiteContent<TechStackContent>('tech-stack');
-export const fetchBlog = () => fetchWebsiteContent<BlogContent>('blog');
-export const fetchAboutContent = () => fetchWebsiteContent<AboutContent>('about');
-export const fetchContactContent = () => fetchWebsiteContent<ContactContent>('contact');
-export const fetchWhyChooseUs = () => fetchWebsiteContent<any>('whyChooseUs');
-
 // ─── Contact ──────────────────────────────────────────────────────────────────
 export async function submitContactInquiry(data: {
   name: string;
@@ -82,11 +68,26 @@ export async function submitContactInquiry(data: {
     },
     body: JSON.stringify(data),
   });
-  
+
   if (!res.ok) {
     const error = await res.json().catch(() => ({}));
     throw new Error(error.message || 'Failed to submit inquiry');
   }
-  
+
   return res.json();
 }
+
+
+// ─── Typed convenience helpers ────────────────────────────────────────────────
+export const fetchHeroContent = () => fetchWebsiteContent<HeroContent>('hero');
+export const fetchProcessContent = () => fetchWebsiteContent<ProcessContent>('process');
+export const fetchCTAContent = () => fetchWebsiteContent<CTAContent>('cta');
+export const fetchTestimonials = () => fetchWebsiteContent<TestimonialsContent>('testimonials');
+export const fetchIndustries = () => fetchWebsiteContent<IndustriesContent>('industries');
+export const fetchFAQ = () => fetchWebsiteContent<FAQContent>('faqs');
+export const fetchSolutions = () => fetchWebsiteContent<SolutionsContent>('solutions');
+export const fetchTechStack = () => fetchWebsiteContent<TechStackContent>('tech-stack');
+export const fetchBlog = () => fetchWebsiteContent<BlogContent>('blog');
+export const fetchAboutContent = () => fetchWebsiteContent<AboutContent>('about');
+export const fetchContactContent = () => fetchWebsiteContent<ContactContent>('contact');
+export const fetchWhyChooseUs = () => fetchWebsiteContent<any>('whyChooseUs');

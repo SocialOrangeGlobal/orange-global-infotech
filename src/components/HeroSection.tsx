@@ -228,8 +228,8 @@ export default function HeroSection({
                   sizes="120px"
                   className={`object-contain ${logo.alt === 'Microsoft' ? 'scale-[1.35] md:scale-[1.6]' : ''}`}
                   style={{ height: '2.5rem', width: 'auto' }}
-                  priority={i === 0}
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  priority={i < clientLogos.length}
+                  loading={i < clientLogos.length ? 'eager' : 'lazy'}
                 />
               </div>
             ))}

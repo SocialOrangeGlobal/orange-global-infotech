@@ -1,12 +1,15 @@
 import HeroSection from '@/components/HeroSection'
-import ProjectsSection from '@/components/ProjectsSection'
-import HomeServicesSection from '@/components/HomeServicesSection'
-import SolutionsSection from '@/components/SolutionsSection'
-import IndustriesSection from '@/components/IndustriesSection'
-import TechStackSection from '@/components/TechStackSection'
-import ProcessSection from '@/components/ProcessSection'
-import TestimonialsSection from '@/components/TestimonialsSection'
-import CTASection from '@/components/CTASection'
+import dynamicImport from 'next/dynamic'
+
+const ProjectsSection = dynamicImport(() => import('@/components/ProjectsSection'), { ssr: true })
+const HomeServicesSection = dynamicImport(() => import('@/components/HomeServicesSection'), { ssr: true })
+const SolutionsSection = dynamicImport(() => import('@/components/SolutionsSection'), { ssr: true })
+const IndustriesSection = dynamicImport(() => import('@/components/IndustriesSection'), { ssr: true })
+const TechStackSection = dynamicImport(() => import('@/components/TechStackSection'), { ssr: true })
+const ProcessSection = dynamicImport(() => import('@/components/ProcessSection'), { ssr: true })
+const TestimonialsSection = dynamicImport(() => import('@/components/TestimonialsSection'), { ssr: true })
+const CTASection = dynamicImport(() => import('@/components/CTASection'), { ssr: true })
+
 import {
   fetchProjects, fetchServices,
   fetchHeroContent, fetchProcessContent, fetchCTAContent,
