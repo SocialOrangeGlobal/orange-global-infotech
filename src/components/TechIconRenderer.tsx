@@ -1,8 +1,32 @@
-import * as SiIcons from 'react-icons/si';
-import * as FaIcons from 'react-icons/fa';
+import { 
+  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs, 
+  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker, 
+  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss, 
+  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql, 
+  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter, 
+  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift, 
+  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
+  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
+  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
+  SiStrapi, SiContentful, SiNetlify, SiHeroku
+} from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
 import { Code2 } from 'lucide-react';
 
-const techNameMap: Record<string, string> = {
+const IconRegistry: Record<string, any> = {
+  SiReact, SiNodedotjs, SiPostgresql, SiMongodb, SiNextdotjs, 
+  SiTypescript, SiJavascript, SiTailwindcss, SiPython, SiDocker, 
+  SiVuedotjs, SiAngular, SiPhp, SiLaravel, SiHtml5, SiCss3: SiCss, 
+  SiGit, SiGithub, SiFirebase, SiSupabase, SiRedis, SiMysql, SiGraphql, 
+  SiFigma, SiExpress, SiSpringboot, SiNestjs, SiAndroid, SiIos, SiFlutter, 
+  SiKubernetes, SiGooglecloud, SiRust, SiGo, SiSwift, 
+  SiKotlin, SiWordpress, SiStripe, SiSolidity, SiEthereum, SiPrisma, 
+  SiFramer, SiVercel, SiGreensock, SiReactrouter, SiRedux, SiMui, SiChakraui, 
+  SiBootstrap, SiSass, SiVite, SiJest, SiCypress, SiApollographql, SiSanity, 
+  SiStrapi, SiContentful, SiNetlify, SiHeroku, FaJava
+};
+
+export const techNameMap: Record<string, string> = {
   'react': 'SiReact',
   'node.js': 'SiNodedotjs',
   'nodejs': 'SiNodedotjs',
@@ -81,7 +105,7 @@ const techNameMap: Record<string, string> = {
   'heroku': 'SiHeroku'
 };
 
-const techColorMap: Record<string, string> = {
+export const techColorMap: Record<string, string> = {
   'SiReact': '#61DAFB',
   'SiNodedotjs': '#339933',
   'SiPostgresql': '#4169E1',
@@ -116,11 +140,11 @@ const techColorMap: Record<string, string> = {
   'SiFlutter': '#02569B',
   'SiKubernetes': '#326CE5',
   'SiGooglecloud': '#4285F4',
-  'SiMicrosoftazure': '#0078D4',
+  'SiMicrosoftazure': '#0089D6',
   'SiRust': '#000000',
   'SiGo': '#00ADD8',
-  'SiSwift': '#F05138',
-  'SiKotlin': '#7F52FF',
+  'SiSwift': '#FA7343',
+  'SiKotlin': '#0095D5',
   'SiWordpress': '#21759B',
   'SiStripe': '#008CDD',
   'SiSolidity': '#363636',
@@ -140,39 +164,19 @@ const techColorMap: Record<string, string> = {
   'SiCypress': '#17202C',
   'SiApollographql': '#311C87',
   'SiSanity': '#F03E2F',
-  'SiStrapi': '#2E7EEA',
+  'SiStrapi': '#2F2E8B',
   'SiContentful': '#2478CC',
   'SiNetlify': '#00C7B7',
   'SiHeroku': '#430098'
 };
 
-export default function TechIconRenderer({ iconName, color, size = 20 }: { iconName: string, color?: string, size?: number }) {
-  if (!iconName) return <Code2 color={color} size={size} />;
-
-  const normalized = iconName.toLowerCase().trim();
-  const finalIconName = techNameMap[normalized] || iconName;
-  const finalColor = techColorMap[finalIconName] || (color === '#333' ? undefined : color) || techColorMap[`Si${finalIconName.replace(/^Si|Fa/, '')}`] || color;
-
-  if (finalIconName.startsWith('Si')) {
-    const IconComponent = (SiIcons as any)[finalIconName];
-    if (IconComponent) return <IconComponent color={finalColor} size={size} />;
-  }
-  if (finalIconName.startsWith('Fa')) {
-    const IconComponent = (FaIcons as any)[finalIconName];
-    if (IconComponent) return <IconComponent color={finalColor} size={size} />;
-  }
-  // Clean name for dynamic lookup (e.g. "Framer Motion" -> "Framermotion")
-  const cleanName = iconName.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-  const pascalName = `Si${cleanName.charAt(0).toUpperCase() + cleanName.slice(1)}`;
+export default function TechIconRenderer({ iconName, size = 16, color }: { iconName: string, size?: number, color?: string }) {
+  if (!iconName) return <Code2 size={size} color={color} />;
   
-  const SiDynamic = (SiIcons as any)[pascalName];
-  if (SiDynamic) return <SiDynamic color={techColorMap[pascalName] || finalColor} size={size} />;
-  
-  // Also try exact PascalCase without lowercase
-  const exactPascal = `Si${iconName.replace(/[^a-zA-Z0-9]/g, '')}`;
-  const SiExact = (SiIcons as any)[exactPascal];
-  if (SiExact) return <SiExact color={techColorMap[exactPascal] || finalColor} size={size} />;
+  const normalizedName = iconName.toLowerCase().trim();
+  const reactIconName = techNameMap[normalizedName];
+  const Icon = reactIconName ? IconRegistry[reactIconName] : Code2;
+  const iconColor = color || (reactIconName ? techColorMap[reactIconName] : '#6b7280');
 
-  // console.warn(`Missing icon for technology: ${iconName}`);
-  return <Code2 color={color} size={size} />;
+  return <Icon size={size} style={{ color: iconColor }} />;
 }

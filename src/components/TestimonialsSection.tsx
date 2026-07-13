@@ -3,6 +3,7 @@ import type { TestimonialItem } from '@/lib/types'
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star } from 'lucide-react'
+import Image from 'next/image'
 
 export default function TestimonialsSection({
   title = 'What our users say',
@@ -67,10 +68,12 @@ export default function TestimonialsSection({
                 }`}
             >
               {client.logo ? (
-                <img
+                <Image
                   src={client.logo}
                   alt={client.clientName}
-                  className={`h-6 md:h-7 object-contain ${client.clientName === 'Microsoft' ? 'scale-[1.35] md:scale-[1.6]' : ''}`}
+                  width={140}
+                  height={40}
+                  className={`h-6 md:h-7 w-auto object-contain ${client.clientName === 'Microsoft' ? 'scale-[1.35] md:scale-[1.6]' : ''}`}
                 />
               ) : (
                 <span className="font-semibold text-gray-600">{client.clientName}</span>

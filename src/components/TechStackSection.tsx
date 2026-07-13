@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 // All tech icons using Devicons CDN — real logos, no text
 const allTechs = [
@@ -62,12 +63,13 @@ const deviconMap: Record<string, string> = {
 function TechIcon({ name, icon }: { name: string; icon: string }) {
   return (
     <div className="shrink-0 flex flex-col items-center gap-2.5 mx-4 group cursor-default">
-      <div className="w-[68px] h-[68px] rounded-[18px] bg-white border border-gray-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex items-center justify-center p-3.5 transition-all duration-300 group-hover:shadow-[0_8px_28px_rgba(0,0,0,0.12)] group-hover:-translate-y-1.5 group-hover:border-gray-300">
-        <img
+      <div className="relative w-[68px] h-[68px] rounded-[18px] bg-white border border-gray-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.06)] flex items-center justify-center p-3.5 transition-all duration-300 group-hover:shadow-[0_8px_28px_rgba(0,0,0,0.12)] group-hover:-translate-y-1.5 group-hover:border-gray-300">
+        <Image
           src={icon}
           alt={name}
-          className="w-full h-full object-contain"
-          loading="lazy"
+          width={40}
+          height={40}
+          className="object-contain"
         />
       </div>
       <span className="text-[11px] font-medium text-gray-500 whitespace-nowrap">{name}</span>
