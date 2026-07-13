@@ -23,23 +23,23 @@ export default function Template({ children }: { children: React.ReactNode }) {
             key="loader"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
-            className="fixed inset-0 z-[9999] bg-[#FAFAFA] flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[9999] bg-[#f7f7f5] flex flex-col items-center justify-center"
           >
-            <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-col items-center gap-8">
               {/* Logo */}
-              <div className="relative w-32 h-32 md:w-40 md:h-40 animate-pulse">
+              <div className="relative w-36 h-36 md:w-44 md:h-44 animate-pulse drop-shadow-sm">
                 <Image
-                  src="https://orange-global-infotech-admin.vercel.app/images/Orange-Global-Logo.png"
+                  src="/logo.png"
                   alt="Orange Global Infotech Logo"
                   fill
-                  sizes="(max-width: 768px) 128px, 160px"
+                  sizes="(max-width: 768px) 144px, 176px"
                   className="object-contain"
                   priority
                 />
               </div>
-              
+
               {/* Loading with moving dots */}
-              <div className="flex items-center gap-1 text-[#FF6B00] font-semibold text-xl tracking-widest uppercase">
+              <div className="flex items-center gap-1 text-[#FF6B00] font-heading font-bold text-[22px] tracking-[0.15em] uppercase">
                 <span>Loading</span>
                 <span className="flex gap-1 ml-1 w-8">
                   <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0 }}>.</motion.span>
