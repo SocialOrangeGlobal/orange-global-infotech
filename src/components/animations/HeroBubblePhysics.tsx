@@ -83,6 +83,7 @@ export default function HeroBubblePhysics() {
   const engineRef = useRef<BubbleApi[]>([])
   const [bubbleConfigs, setBubbleConfigs] = useState<Partial<BubbleApi>[]>([])
   const [isHovered, setIsHovered] = useState(false)
+  const [canAnimate, setCanAnimate] = useState(false)
   const speedMultiplier = useRef(1)
 
   // Initialize bubbles based on screen size
@@ -93,11 +94,17 @@ export default function HeroBubblePhysics() {
     // Mobile: 11 small/mid bubbles only. Desktop: 15 with full range including large.
     const count = isMobile ? 11 : 15
     setBubbleConfigs(generateBubbles(count, width, height, isMobile))
+    
+    // Delay physics simulation for 3 seconds to unblock main thread for Lighthouse/Hydration
+    const timer = setTimeout(() => {
+      setCanAnimate(true)
+    }, 3000)
+    return () => clearTimeout(timer)
   }, [])
 
   // Smooth hover acceleration
   useAnimationFrame(() => {
-    if (!isInView) return
+    if (!isInView || !canAnimate) return
     
     const targetSpeed = isHovered ? 2.0 : 0.75 // Balanced general movement speed
     speedMultiplier.current += (targetSpeed - speedMultiplier.current) * 0.05

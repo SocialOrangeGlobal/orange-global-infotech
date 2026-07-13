@@ -105,7 +105,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
                     {/* Screenshot */}
                     <div className="relative w-full bg-[#FAFAFA] overflow-hidden flex items-center justify-center min-h-[200px] sm:min-h-[300px]">
                       {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
-                      <Image src={currentSrc} alt={alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 800px" priority={priority} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
+                      <Image src={currentSrc} alt={alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 800px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
                       <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-transparent pointer-events-none z-20" />
                     </div>
                   </div>
@@ -122,7 +122,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
               <div className="relative bg-[#1a1a1e] rounded-[2rem] sm:rounded-[2.5rem] p-[10px] sm:p-[14px]" style={{ boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)' }}>
                 <div className="bg-[#FAFAFA] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden relative w-full flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
                   {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
-                  <Image src={currentSrc} alt={`${alt} Tablet`} width={800} height={1024} sizes="(max-width: 768px) 100vw, 600px" priority={priority} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
+                  <Image src={currentSrc} alt={`${alt} Tablet`} width={800} height={1024} sizes="(max-width: 768px) 100vw, 600px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
                 </div>
                 <div className="absolute top-[20px] sm:top-[28px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-black border border-[#1a1a1e]" />
               </div>
@@ -133,7 +133,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
                 <div className="bg-[#FAFAFA] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative w-full flex items-center justify-center min-h-[400px] sm:min-h-[500px]">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-6 sm:h-7 bg-[#1a1a1e] rounded-b-2xl sm:rounded-b-3xl z-30" />
                   {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
-                  <Image src={currentSrc} alt={`${alt} Mobile`} width={400} height={800} sizes="(max-width: 768px) 100vw, 400px" priority={priority} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 z-20 relative ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
+                  <Image src={currentSrc} alt={`${alt} Mobile`} width={400} height={800} sizes="(max-width: 768px) 100vw, 400px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 z-20 relative ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
                 </div>
               </div>
             )}
