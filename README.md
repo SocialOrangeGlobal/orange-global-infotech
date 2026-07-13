@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo-dark.png" alt="Orange Global Infotech Logo" width="400"/>
+  <img src="https://raw.githubusercontent.com/SocialOrangeGlobal/orange-global-infotech/main/public/logo-dark.png" alt="Orange Global Infotech Logo" width="400"/>
 </p>
 
 # Orange Global Infotech
