@@ -4,7 +4,8 @@ import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import TechIconRenderer from './TechIconRenderer'
+import dynamic from 'next/dynamic'
+const TechIconRenderer = dynamic(() => import('./TechIconRenderer'), { ssr: false })
 import { getIcon } from '@/lib/iconMap'
 import { Monitor, Tablet, Smartphone, Rocket, Code2, Zap, ArrowUpRight, Loader2 } from 'lucide-react'
 

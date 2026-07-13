@@ -2,8 +2,10 @@ import { notFound } from 'next/navigation'
 import { fetchServices, fetchCTAContent } from '@/lib/api'
 import CTASection from '@/components/CTASection'
 import { Layers, Check } from 'lucide-react'
-import TechIconRenderer from '@/components/TechIconRenderer'
+import dynamicImport from 'next/dynamic'
 import Link from 'next/link'
+
+const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRenderer'), { ssr: false })
 
 export const dynamic = 'force-dynamic'
 
