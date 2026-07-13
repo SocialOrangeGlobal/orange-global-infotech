@@ -5,7 +5,7 @@ import { Layers, Check } from 'lucide-react'
 import dynamicImport from 'next/dynamic'
 import Link from 'next/link'
 
-const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRenderer'), { ssr: false })
+const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRenderer'))
 
 export const dynamic = 'force-dynamic'
 

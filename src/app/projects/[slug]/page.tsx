@@ -3,7 +3,7 @@ import { fetchProjects, fetchCTAContent } from '@/lib/api'
 import CTASection from '@/components/CTASection'
 import { Check, Link as LinkIcon, Calendar, User, Layout, ArrowUpRight } from 'lucide-react'
 import dynamicImport from 'next/dynamic'
-const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRenderer'), { ssr: false })
+const TechIconRenderer = dynamicImport(() => import('@/components/TechIconRenderer'))
 import Link from 'next/link'
 import Image from 'next/image'
 
