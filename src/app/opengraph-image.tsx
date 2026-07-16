@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og'
-import fs from 'fs'
-import path from 'path'
+export const runtime = 'edge'
 
 export const alt = 'Orange Global Infotech - Digital Solutions'
 export const size = {
@@ -10,8 +9,6 @@ export const size = {
 export const contentType = 'image/png'
 
 export default async function Image() {
-  const logoData = fs.readFileSync(path.join(process.cwd(), 'public', 'logo.png'))
-  const logoSrc = `data:image/png;base64,${logoData.toString('base64')}`
 
   return new ImageResponse(
     (
@@ -29,7 +26,7 @@ export default async function Image() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px' }}>
-          <img src={logoSrc} width={300} style={{ objectFit: 'contain' }} />
+          <img src="https://raw.githubusercontent.com/SocialOrangeGlobal/orange-global-infotech/main/public/logo.png" width={300} style={{ objectFit: 'contain' }} />
         </div>
 
         <h1

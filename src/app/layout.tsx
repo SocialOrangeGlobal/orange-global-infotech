@@ -22,8 +22,10 @@ const sora = Sora({
   display: 'swap',
 })
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://orange-global-infotech.vercel.app'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://orangeglobalinfotech.com'),
+  metadataBase: new URL(baseUrl),
   title: {
     default: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
     template: '%s | Orange Global Infotech',
