@@ -5,8 +5,6 @@ import dynamicImport from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const GlobalClickBubbles = dynamicImport(() => import('@/components/animations/GlobalClickBubbles'))
-const CustomCursor = dynamicImport(() => import('@/components/animations/CustomCursor'))
 import { fetchWebsiteContent } from '@/lib/api'
 import type { NavContent, FooterContent } from '@/lib/types'
 
@@ -27,11 +25,11 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://orange-global-infot
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
+    default: 'Orange Global Infotech | Building Future-Ready Software for Modern Businesses',
     template: '%s | Orange Global Infotech',
   },
   description:
-    'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
+    'We design and develop scalable web applications, AI-powered solutions, cloud platforms, and enterprise software that help businesses innovate, grow, and stay ahead in a rapidly evolving digital world.',
   keywords: [
     'web development',
     'software development',
@@ -58,9 +56,9 @@ export const metadata: Metadata = {
     canonical: 'https://orangeglobalinfotech.com',
   },
   openGraph: {
-    title: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
+    title: 'Orange Global Infotech | Building Future-Ready Software for Modern Businesses',
     description:
-      'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
+      'We design and develop scalable web applications, AI-powered solutions, cloud platforms, and enterprise software that help businesses innovate, grow, and stay ahead in a rapidly evolving digital world.',
     url: 'https://orangeglobalinfotech.com',
     siteName: 'Orange Global Infotech',
     type: 'website',
@@ -68,9 +66,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Orange Global Infotech | Transforming Ideas Into Powerful Digital Solutions',
+    title: 'Orange Global Infotech | Building Future-Ready Software for Modern Businesses',
     description:
-      'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
+      'We design and develop scalable web applications, AI-powered solutions, cloud platforms, and enterprise software that help businesses innovate, grow, and stay ahead in a rapidly evolving digital world.',
     creator: '@OrangeGlobal', // Example handle
   },
   icons: {
