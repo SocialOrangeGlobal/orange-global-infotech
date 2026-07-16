@@ -179,8 +179,16 @@ export const techColorMap: Record<string, string> = {
   'SiHeroku': '#430098'
 };
 
-export default function TechIconRenderer({ iconName, size = 16, color }: { iconName: string, size?: number, color?: string }) {
+export default function TechIconRenderer({ iconName, size = 16, color }: { iconName: string | any, size?: number, color?: string }) {
   if (!iconName) return <Code2 size={size} color={color} />;
+
+  // Hot-reload safety: If a React component is passed instead of a string, render it directly
+  if (typeof iconName === 'function' || typeof iconName === 'object') {
+    const CustomIcon = iconName;
+    return <CustomIcon size={size} color={color} />;
+  }
+
+  if (typeof iconName !== 'string') return <Code2 size={size} color={color} />;
 
   let Icon = Code2;
   let iconColor = color || '#6b7280';

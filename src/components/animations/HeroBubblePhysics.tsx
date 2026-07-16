@@ -3,12 +3,7 @@ import { getIcon } from '@/lib/iconMap';
 
 import { useRef, useEffect, useState } from 'react'
 import { motion, useMotionValue, useAnimationFrame, MotionValue, useInView } from 'framer-motion'
-import {
-  Code, Globe, Smartphone, Cloud, Database, Server,
-  Cpu, Box, Monitor, Layout, Rocket, Shield,
-  Settings, Users, Zap, Briefcase, Activity, Layers,
-  Wifi, Command
-} from 'lucide-react'
+import TechIconRenderer from '@/components/TechIconRenderer';
 
 const COLORS = [
   '#FF6B00', // Orange
@@ -19,10 +14,8 @@ const COLORS = [
 ]
 
 const ICONS = [
-  Code, Globe, Smartphone, Cloud, Database, Server,
-  Cpu, Box, Monitor, Layout, Rocket, Shield,
-  Settings, Users, Zap, Briefcase, Activity, Layers,
-  Wifi, Command
+  'react', 'node', 'next.js', 'typescript', 'tailwind', 'python', 'docker', 'aws',
+  'vue', 'java', 'html', 'css', 'github', 'mongodb', 'postgresql', 'figma', 'kubernetes', 'gcp', 'azure', 'graphql'
 ]
 
 type BubbleApi = {
@@ -314,9 +307,10 @@ function BubbleNode({
           }}
         >
           {config.icon && (() => {
-            const Icon = getIcon(config.icon); return <Icon
+            return <TechIconRenderer
+              iconName={config.icon as string}
               size={apiRef.current.radius * 0.9}
-              strokeWidth={apiRef.current.radius < 18 ? 2.5 : 2}
+              color={isWhite ? '#111111' : '#ffffff'}
             />
           })()}
         </span>

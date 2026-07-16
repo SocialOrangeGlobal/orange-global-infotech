@@ -12,8 +12,10 @@ Welcome to the **Orange Global Infotech** digital platform! This is a modern, hi
 - **Modern UI/UX**: Premium aesthetic featuring glassmorphism, dynamic scrolling effects, and fluid typography.
 - **Interactive Animations**: Advanced, physics-based particle backgrounds and floating components powered by Framer Motion.
 - **Dynamic CMS Integration**: Fully integrated with a custom NestJS backend for real-time dynamic updates of Services, Projects, and Website Content without redeployments.
-- **Fully Responsive**: Flawless visual scaling from ultra-wide desktops down to mobile devices.
+- **Interactive 3D Elements**: Integrated `<model-viewer>` for lightweight, interactive 3D WebGL models with custom interaction constraints.
 - **Dynamic Theming**: Intelligent usage of SVG tech-stack icons directly reflecting their official brand colors.
+- **Interactive Device Mockups**: Animated and responsive device toggles (Desktop, Tablet, Mobile) for showcasing portfolio projects.
+- **Fully Responsive Layouts**: Pixel-perfect scaling across ultra-wide desktops and mobile devices with zero horizontal overflow.
 
 ## 🛠️ Tech Stack
 

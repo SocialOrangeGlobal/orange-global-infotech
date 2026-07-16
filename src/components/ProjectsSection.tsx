@@ -7,6 +7,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 const TechIconRenderer = dynamic(() => import('./TechIconRenderer'), { ssr: false })
 import { getIcon } from '@/lib/iconMap'
+import type { LucideIcon } from 'lucide-react'
 import { Monitor, Tablet, Smartphone, Rocket, Code2, Zap, ArrowUpRight, Loader2 } from 'lucide-react'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
@@ -35,7 +36,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
 
   const handleLoad = useCallback(() => setIsLoading(false), [])
 
-  const DEVICES: { key: DeviceType; Icon: React.ElementType; label: string }[] = [
+  const DEVICES: { key: DeviceType; Icon: LucideIcon; label: string }[] = [
     { key: 'desktop', Icon: Monitor, label: 'Desktop view' },
     { key: 'tablet', Icon: Tablet, label: 'Tablet view' },
     { key: 'mobile', Icon: Smartphone, label: 'Mobile view' },
@@ -66,7 +67,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
         ))}
       </div>
 
-      <div className="relative flex justify-center w-full min-h-[300px] sm:min-h-[400px] items-center">
+      <div className="relative flex justify-center w-full min-h-[250px] sm:min-h-[400px] items-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={device}
@@ -78,8 +79,8 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
               device === 'desktop'
                 ? 'relative w-full'
                 : device === 'tablet'
-                  ? 'relative w-[340px] sm:w-[480px] md:w-[560px]'
-                  : 'relative w-[240px] sm:w-[280px] md:w-[320px]'
+                  ? 'relative w-[280px] sm:w-[480px] md:w-[560px]'
+                  : 'relative w-[200px] sm:w-[280px] md:w-[320px]'
             }
           >
             {device === 'desktop' && (
@@ -104,7 +105,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
                       </div>
                     </div>
                     {/* Screenshot */}
-                    <div className="relative w-full bg-[#FAFAFA] overflow-hidden flex items-center justify-center min-h-[200px] sm:min-h-[300px]">
+                    <div className="relative w-full bg-[#FAFAFA] overflow-hidden flex items-center justify-center">
                       {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
                       <Image src={currentSrc} alt={alt} width={1200} height={800} sizes="(max-width: 768px) 100vw, 800px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
                       <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] via-transparent to-transparent pointer-events-none z-20" />
@@ -121,7 +122,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
 
             {device === 'tablet' && (
               <div className="relative bg-[#1a1a1e] rounded-[2rem] sm:rounded-[2.5rem] p-[10px] sm:p-[14px]" style={{ boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)' }}>
-                <div className="bg-[#FAFAFA] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden relative w-full flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
+                <div className="bg-[#FAFAFA] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden relative w-full flex items-center justify-center">
                   {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
                   <Image src={currentSrc} alt={`${alt} Tablet`} width={800} height={1024} sizes="(max-width: 768px) 100vw, 600px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
                 </div>
@@ -131,7 +132,7 @@ function DeviceMockup({ images, alt, url, accentColor, priority = false }: Devic
 
             {device === 'mobile' && (
               <div className="relative bg-[#1a1a1e] rounded-[2.5rem] sm:rounded-[3rem] p-[10px] sm:p-[12px]" style={{ boxShadow: '0 40px 80px -20px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1)' }}>
-                <div className="bg-[#FAFAFA] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative w-full flex items-center justify-center min-h-[400px] sm:min-h-[500px]">
+                <div className="bg-[#FAFAFA] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden relative w-full flex items-center justify-center">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-6 sm:h-7 bg-[#1a1a1e] rounded-b-2xl sm:rounded-b-3xl z-30" />
                   {isLoading && <Loader2 className="absolute animate-spin z-10" size={32} style={{ color: accentColor }} />}
                   <Image src={currentSrc} alt={`${alt} Mobile`} width={400} height={800} sizes="(max-width: 768px) 100vw, 400px" priority={priority} quality={priority ? 60 : 75} className={`w-full h-auto block object-cover object-top transition-opacity duration-500 z-20 relative ${isLoading ? 'opacity-0' : 'opacity-100'}`} onLoad={handleLoad} />
@@ -260,7 +261,7 @@ export default function ProjectsSection({
                 </div>
 
                 {/* Visual Mockup */}
-                <div className="w-full lg:w-[62%] relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center">
+                <div className="w-full lg:w-[62%] relative min-h-[300px] sm:min-h-[400px] lg:h-[600px] flex items-center justify-center mt-6 lg:mt-0">
                   <DeviceMockup
                     images={{
                       desktop: meta.images?.desktop ?? project.image ?? '',

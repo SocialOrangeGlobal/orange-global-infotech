@@ -5,8 +5,9 @@ const TechIconRenderer = dynamic(() => import('./TechIconRenderer'), { ssr: fals
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Check, Layers, Globe, Code2, Smartphone, Cloud, BrainCircuit, Database, ShieldCheck, Cpu, Server } from 'lucide-react'
 import Link from 'next/link'
+import type { LucideIcon } from 'lucide-react'
 
-const IconMap: Record<string, React.ElementType> = {
+const IconMap: Record<string, LucideIcon> = {
   Globe,
   Code2,
   Smartphone,
