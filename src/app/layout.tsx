@@ -63,14 +63,6 @@ export const metadata: Metadata = {
     siteName: 'Orange Global Infotech',
     type: 'website',
     locale: 'en_US',
-    images: [
-      {
-        url: '/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'Orange Global Infotech Logo',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -78,7 +70,6 @@ export const metadata: Metadata = {
     description:
       'Orange Global Infotech helps startups, businesses, and enterprises build modern websites, scalable software solutions, mobile applications, and cloud-powered systems.',
     creator: '@OrangeGlobal', // Example handle
-    images: ['/logo.png'],
   },
   icons: {
     icon: [
